@@ -11,7 +11,7 @@
 typedef struct hxzp_Led_Config_s{
 
   /*亮度变化表range:0-A*/
-  const char *table; 
+  char table[32]; 
     
   struct
   {
@@ -36,30 +36,31 @@ typedef struct hxzp_Led_s{
   
   /*用于记录时间*/
   uint32_t preTime;
-
-  struct 
-  {
-    uint8_t insertNum : 5;
-    uint8_t insertUse : 1;
-    uint8_t reserve   : 2;
-  };
   
   struct
   {
+    uint32_t bufferNum : 5;
+    uint32_t insertUse : 1;
+
     /*tableMax:31 scanNum:31 busy:1true openflag:1true*/
-    uint16_t tableNum : 5;
-    uint16_t scanNum : 5;
-    uint16_t busy : 1;
-    uint16_t openflag : 1;    
-    uint16_t light : 4;
+    uint32_t tableNum : 5;
+    uint32_t scanNum : 5;
+    uint32_t busy : 1;    
+    uint32_t light : 4;
+    uint32_t reserve : 11;    
   };
   
-  void (*Write)(uint8_t State);
+  void (*Write)(uint8_t state);
+  
+  /*外部算法函数*/
   void (*Extern)(char *data);
 
 }Led;
 
-void hxzp_led_init(Led *self);
-void hxzp_led_set(const char *name,uint8_t num);
+void hxzp_Led_init(Led *self);
+void hxzp_Led_set(const char *name,uint8_t num);
+void hxzp_Led_insert(const char *name,uint8_t num);
+void hxzp_Led_piece(const char *name,const char *light,uint8_t sacnTime,uint8_t priority,uint8_t loop,uint8_t insert);
+
 #endif
 

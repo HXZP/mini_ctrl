@@ -1,9 +1,10 @@
 #MicroXplorer Configuration settings - do not modify
-CAD.formats=
-CAD.pinconfig=
+CAD.formats=[]
+CAD.pinconfig=Project naming
 CAD.provider=
-FREERTOS.IPParameters=Tasks01
-FREERTOS.Tasks01=defaultTask,24,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL
+FREERTOS.FootprintOK=true
+FREERTOS.IPParameters=Tasks01,FootprintOK
+FREERTOS.Tasks01=defaultTask,24,128,StartDefaultTask,As weak,NULL,Dynamic,NULL,NULL
 File.Version=6
 GPIO.groupedBy=Group By Peripherals
 KeepUserPlacement=false
@@ -109,7 +110,7 @@ PD7.Locked=true
 PD7.Signal=GPIO_Input
 PinOutPanel.RotationAngle=0
 ProjectManager.AskForMigrate=true
-ProjectManager.BackupPrevious=false
+ProjectManager.BackupPrevious=true
 ProjectManager.CompilerOptimize=6
 ProjectManager.ComputerToolchain=false
 ProjectManager.CoupleFile=true

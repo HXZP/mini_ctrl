@@ -1,3 +1,5 @@
+/*基于有头链表，链头不计入数据*/
+
 #include "hxzp_led.h"
 
 
@@ -7,7 +9,7 @@ static List* LedList;
 void StartLedTask(void *argument)
 {
   static uint8_t u8count = 0;
-  uint8_t u8tableNum = 0;
+  
   Led *self;
   
   for(;;)
@@ -15,33 +17,18 @@ void StartLedTask(void *argument)
     for(List *node = LedList->next; node != NULL; node = node->next)
     {
       self = (Led*)(node->data);
-      
-      /*未开启*/
-      if(self->openflag == 0)
-      {
-        continue;
-      }
-
-      if(self->insertUse == 0)
-      {
-        u8tableNum = self->tableNum;
-      }   
-      else
-      {
-        u8tableNum = self->insertNum;
-      }
-      
+           
       /*计算下一动作时间*/
       if(self->preTime == 0)
       {
         self->busy = 1;
         self->preTime = HAL_GetTick();
       }
-      else if(HAL_GetTick() - self->preTime > self->Config[u8tableNum].scanTime*100)
+      else if(HAL_GetTick() - self->preTime > self->Config[self->tableNum].scanTime*100)
       {
-          if(self->Config[u8tableNum].table[self->scanNum + 1] == '\0')
+          if(self->Config[self->tableNum].table[self->scanNum + 1] == '\0')
           {
-            if(self->Config[u8tableNum].loop == 1)
+            if(self->Config[self->tableNum].loop == 1)
             {
               self->scanNum = 0;
               self->busy = 1;
@@ -50,13 +37,14 @@ void StartLedTask(void *argument)
             {
               if(self->insertUse == 1)
               {
+                self->tableNum = self->bufferNum;
                 self->insertUse = 0;
               }
               
               self->busy = 0;            
             }
           }
-          else if(self->Config[u8tableNum].table[self->scanNum + 1] != '\0')
+          else if(self->Config[self->tableNum].table[self->scanNum + 1] != '\0')
           {
             self->scanNum++; 
             self->busy = 1;
@@ -66,7 +54,7 @@ void StartLedTask(void *argument)
       }  
       
       /*解析数据*/
-      switch(self->Config[u8tableNum].table[self->scanNum])
+      switch(self->Config[self->tableNum].table[self->scanNum])
       {
         case '0':
           self->light = 0;
@@ -114,7 +102,7 @@ void StartLedTask(void *argument)
          
         default:
           self->light = 0xF;
-          self->Extern((char *)(&self->Config[u8tableNum].table[self->scanNum]));
+          self->Extern((char *)(&self->Config[self->tableNum].table[self->scanNum]));
           break;
       }
       
@@ -136,14 +124,14 @@ void StartLedTask(void *argument)
 }
 
 
-osThreadId_t ledTaskHandle;
-const osThreadAttr_t ledTask_attributes = {
-  .name = "ledTask",
+osThreadId_t LedTaskHandle;
+const osThreadAttr_t LedTask_attributes = {
+  .name = "LedTask",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 
-void hxzp_led_init(Led *self)
+void hxzp_Led_init(Led *self)
 {
   if(LedList == NULL)
   {
@@ -152,13 +140,19 @@ void hxzp_led_init(Led *self)
  
   List_Insert(LedList,self);  
    
-  if(ledTaskHandle == NULL && LedList != NULL)
+  if(LedTaskHandle == NULL && LedList != NULL)
   {
-    ledTaskHandle = osThreadNew(StartLedTask, NULL, &ledTask_attributes);
+    LedTaskHandle = osThreadNew(StartLedTask, NULL, &LedTask_attributes);
   }
 }
 
-void hxzp_led_set(const char *name,uint8_t num)
+void hxzp_Led_Deinit(void)
+{
+  List_Destroy(LedList);
+}
+
+
+void hxzp_Led_set(const char *name,uint8_t num)
 {
   Led *self;
   
@@ -172,7 +166,6 @@ void hxzp_led_set(const char *name,uint8_t num)
       {
         if(self->Config[self->tableNum].priority <= self->Config[num].priority)
         {
-          self->openflag = 1;
           self->tableNum = num;
           self->scanNum = 0;
           self->preTime = 0;
@@ -183,7 +176,7 @@ void hxzp_led_set(const char *name,uint8_t num)
   }
 }
 
-void hxzp_led_insert(const char *name,uint8_t num)
+void hxzp_Led_insert(const char *name,uint8_t num)
 {
   Led *self;
   
@@ -199,9 +192,9 @@ void hxzp_led_insert(const char *name,uint8_t num)
         {        
           if(self->Config[num].loop == 0)
           {
-            self->openflag = 1;
             self->insertUse = 1;
-            self->insertNum = num;
+            self->bufferNum = self->tableNum;
+            self->tableNum = num;
             self->scanNum = 0; 
             self->preTime = 0;
           }
@@ -212,8 +205,54 @@ void hxzp_led_insert(const char *name,uint8_t num)
   }  
 }  
 
+/*可以直接一段*/
+void hxzp_Led_piece(const char *name,const char *light,uint8_t sacnTime,uint8_t priority,uint8_t loop,uint8_t insert)
+{
+  Led *self;
+  uint8_t len = strlen(light);
+  
+  if (name == NULL || light == NULL) 
+  {
+      return; 
+  }  
+  
+  for(List *node = LedList->next; node != NULL; node = node->next)
+  {
+    self = (Led*)(node->data);
+    
+    if(strcmp(self->name, name) == 0)
+    {
+      if(self->Config[self->tableNum].priority <= priority)
+      {        
+        memcpy(self->Config[self->ConfigNum-1].table, light, len);
+        self->Config[self->ConfigNum-1].table[len] = '\0';
+        
+        self->Config[self->ConfigNum-1].scanTime = sacnTime;
+        self->Config[self->ConfigNum-1].priority = priority;
+        self->Config[self->ConfigNum-1].loop = loop;
+               
+        if(insert && self->Config[self->ConfigNum-1].loop == 0)
+        {
+          self->insertUse = 1;
+          self->bufferNum = self->tableNum;
+          self->tableNum = self->ConfigNum-1;
+          self->scanNum = 0; 
+          self->preTime = 0;
+        }
+        else
+        {
+          self->insertUse = 1;
+          self->tableNum = self->ConfigNum-1;
+          self->scanNum = 0; 
+          self->preTime = 0;   
+        }
+      } 
 
+      break;
+    }
+  }
 
+}
 
 
 
