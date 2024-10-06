@@ -16,14 +16,11 @@
 #include "hxzp_list.h"
 #include "main.h"
 
-#ifndef KEY_DEBOUNCING_TIME
-#define KEY_DEBOUNCING_TIME 5 //ms
-#endif
-
 typedef enum
 {
   KEY_IDLE = 0,
-
+  
+  KEY_PRESS,
   KEY_DOWN,
   KEY_DOWN_LONG,
   KEY_DOWN_HOLD,

@@ -39,9 +39,12 @@ void StartLedTask(void *argument)
               {
                 self->tableNum = self->bufferNum;
                 self->insertUse = 0;
+                                
               }
               
-              self->busy = 0;            
+              self->busy = 0;   
+
+              continue;
             }
           }
           else if(self->Config[self->tableNum].table[self->scanNum + 1] != '\0')
@@ -102,7 +105,10 @@ void StartLedTask(void *argument)
          
         default:
           self->light = 0xF;
-          self->Extern((char *)(&self->Config[self->tableNum].table[self->scanNum]));
+          if(self->Extern != NULL)
+          {
+            self->Extern((char *)(&self->Config[self->tableNum].table[self->scanNum]));
+          }          
           break;
       }
       

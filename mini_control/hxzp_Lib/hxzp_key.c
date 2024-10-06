@@ -43,7 +43,11 @@ void StartKeyTask(void *argument)
         /*ÊÂ¼þÅÐ¶Ï*/
         if(self->value == 1)
         {
-          if(self->state == KEY_IDLE && errTime > self->Config[self->tableNum].down_Time*100)
+          if(self->state == KEY_IDLE)
+          {
+            self->state = KEY_PRESS;
+          }         
+          else if(self->state == KEY_PRESS && errTime > self->Config[self->tableNum].down_Time*100)
           {
             self->state = KEY_DOWN;
             
