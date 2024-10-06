@@ -170,6 +170,7 @@ void Key_Event_CW(uint8_t state)
       break;
 
     case KEY_PRESS:
+      
       hxzp_Led_piece("W0","0123456789A9876543210",1,1,0,1);
       break;
     
@@ -255,6 +256,7 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN StartDefaultTask */    
   hxzp_Led_init(&led1);
   hxzp_Led_init(&led2);
+  hxzp_Led_init(&led3);
   hxzp_Led_init(&led3);
   
   hxzp_Key_init(&key_cw);

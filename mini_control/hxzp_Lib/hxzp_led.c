@@ -9,7 +9,7 @@ static List* LedList;
 void StartLedTask(void *argument)
 {
   static uint8_t u8count = 0;
-  
+
   Led *self;
   
   for(;;)
@@ -137,19 +137,33 @@ const osThreadAttr_t LedTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 
-void hxzp_Led_init(Led *self)
+uint8_t hxzp_Led_init(Led *self)
 {
+  Led *temp;
+  
   if(LedList == NULL)
   {
     LedList = List_Create();
   }
  
+  for(List *node = LedList->next; node != NULL; node = node->next)
+  {
+    temp = (Led*)(node->data);
+    
+    if(strcmp(temp->name, self->name) == 0)
+    {  
+      return 0;
+    }
+  }  
+      
   List_Insert(LedList,self);  
    
   if(LedTaskHandle == NULL && LedList != NULL)
   {
     LedTaskHandle = osThreadNew(StartLedTask, NULL, &LedTask_attributes);
   }
+  
+  return 1;
 }
 
 void hxzp_Led_Deinit(void)
@@ -215,13 +229,14 @@ void hxzp_Led_insert(const char *name,uint8_t num)
 void hxzp_Led_piece(const char *name,const char *light,uint8_t sacnTime,uint8_t priority,uint8_t loop,uint8_t insert)
 {
   Led *self;
-  uint8_t len = strlen(light);
+  uint8_t len;
   
   if (name == NULL || light == NULL) 
   {
       return; 
   }  
   
+  len = strlen(light);
   for(List *node = LedList->next; node != NULL; node = node->next)
   {
     self = (Led*)(node->data);
@@ -257,7 +272,6 @@ void hxzp_Led_piece(const char *name,const char *light,uint8_t sacnTime,uint8_t 
       break;
     }
   }
-
 }
 
 

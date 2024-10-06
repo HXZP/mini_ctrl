@@ -3,7 +3,7 @@
 <title>Static Call Graph - [mini_control\mini_control.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image mini_control\mini_control.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sun Oct  6 11:02:28 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sun Oct  6 11:43:41 2024
 <BR><P>
 <H3>Maximum Stack Usage =        348 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -361,6 +361,8 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hxzp_Key_eventReg
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hxzp_Led_set
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hxzp_Key_init
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hxzp_Led_init
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hxzp_Led_piece
 </UL>
 
@@ -747,8 +749,8 @@ Global Symbols
 <P><STRONG><a name="[c]"></a>SVC_Handler</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, port.o(.text.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
-<P><STRONG><a name="[4f]"></a>StartDefaultTask</STRONG> (Thumb, 192 bytes, Stack size 16 bytes, test.o(.text.StartDefaultTask))
-<BR><BR>[Stack]<UL><LI>Max Depth = 292<LI>Call Chain = StartDefaultTask &rArr; hxzp_Key_init &rArr; osThreadNew &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; vListInsertEnd
+<P><STRONG><a name="[4f]"></a>StartDefaultTask</STRONG> (Thumb, 200 bytes, Stack size 24 bytes, test.o(.text.StartDefaultTask))
+<BR><BR>[Stack]<UL><LI>Max Depth = 308<LI>Call Chain = StartDefaultTask &rArr; hxzp_Key_init &rArr; osThreadNew &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; vListInsertEnd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hxzp_Key_eventReg
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hxzp_Led_set
@@ -819,20 +821,22 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartDefaultTask
 </UL>
 
-<P><STRONG><a name="[8e]"></a>hxzp_Key_init</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, hxzp_key.o(.text.hxzp_Key_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 276<LI>Call Chain = hxzp_Key_init &rArr; osThreadNew &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; vListInsertEnd
+<P><STRONG><a name="[8e]"></a>hxzp_Key_init</STRONG> (Thumb, 192 bytes, Stack size 24 bytes, hxzp_key.o(.text.hxzp_Key_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 284<LI>Call Chain = hxzp_Key_init &rArr; osThreadNew &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; vListInsertEnd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadNew
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;List_Insert
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;List_Create
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StartDefaultTask
 </UL>
 
-<P><STRONG><a name="[8d]"></a>hxzp_Led_init</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, hxzp_led.o(.text.hxzp_Led_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 276<LI>Call Chain = hxzp_Led_init &rArr; osThreadNew &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; vListInsertEnd
+<P><STRONG><a name="[8d]"></a>hxzp_Led_init</STRONG> (Thumb, 192 bytes, Stack size 24 bytes, hxzp_led.o(.text.hxzp_Led_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 284<LI>Call Chain = hxzp_Led_init &rArr; osThreadNew &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; vListInsertEnd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadNew
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;List_Insert
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;List_Create
 </UL>

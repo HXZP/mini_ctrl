@@ -106,19 +106,33 @@ const osThreadAttr_t KeyTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 
-void hxzp_Key_init(Key *self)
+uint8_t hxzp_Key_init(Key *self)
 {
+  Key *temp;
+  
   if(KeyList == NULL)
   {
     KeyList = List_Create();
   }
- 
+
+  for(List *node = KeyList->next; node != NULL; node = node->next)
+  {
+    temp = (Key*)(node->data);
+    
+    if(strcmp(temp->name, self->name) == 0)
+    {  
+      return 0;
+    }
+  }  
+  
   List_Insert(KeyList,self);  
    
   if(KeyTaskHandle == NULL && KeyList != NULL)
   {
     KeyTaskHandle = osThreadNew(StartKeyTask, NULL, &KeyTask_attributes);
   }
+  
+  return 1;
 }
 
 void hxzp_Key_Deinit(void)

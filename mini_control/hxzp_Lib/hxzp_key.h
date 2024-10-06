@@ -72,7 +72,7 @@ typedef struct hxzp_Key_s{
 
 typedef void (*key_event)(uint8_t state);
 
-void hxzp_Key_init(Key *self);
+uint8_t hxzp_Key_init(Key *self);
   
 void hxzp_Key_eventReg(const char *name, key_event handle);
 

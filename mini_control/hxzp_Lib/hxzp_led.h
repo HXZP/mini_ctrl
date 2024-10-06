@@ -8,6 +8,8 @@
 #include "main.h"
 
 
+
+
 typedef struct hxzp_Led_Config_s{
 
   /*亮度变化表range:0-A*/
@@ -57,7 +59,7 @@ typedef struct hxzp_Led_s{
 
 }Led;
 
-void hxzp_Led_init(Led *self);
+uint8_t hxzp_Led_init(Led *self);
 void hxzp_Led_set(const char *name,uint8_t num);
 void hxzp_Led_insert(const char *name,uint8_t num);
 void hxzp_Led_piece(const char *name,const char *light,uint8_t sacnTime,uint8_t priority,uint8_t loop,uint8_t insert);
