@@ -13,17 +13,19 @@
 typedef struct hxzp_Led_Config_s{
 
   /*亮度变化表range:0-A*/
-  char table[32]; 
+  char table[256]; 
     
   struct
   {
-    /*100ms Pscan range:0-3100ms */
-    uint8_t scanTime : 5;
+    /*10ms Pscan range:0-3100ms */
+    uint16_t scanTime : 8;
     
     /*range:0-3*/
-    uint8_t priority : 2;
+    uint16_t priority : 2;
     
-    uint8_t loop : 1;
+    uint16_t loop : 1;
+    
+    uint16_t reserve : 5;
   };
 
 }Led_Config;
@@ -46,10 +48,10 @@ typedef struct hxzp_Led_s{
 
     /*tableMax:31 scanNum:31 busy:1true openflag:1true*/
     uint32_t tableNum : 5;
-    uint32_t scanNum : 5;
+    uint32_t scanNum : 8;
     uint32_t busy : 1;    
     uint32_t light : 4;
-    uint32_t reserve : 11;    
+    uint32_t reserve : 8;    
   };
   
   void (*Write)(uint8_t state);

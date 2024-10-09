@@ -22,9 +22,10 @@ void StartLedTask(void *argument)
       if(self->preTime == 0)
       {
         self->busy = 1;
+        
         self->preTime = HAL_GetTick();
       }
-      else if(HAL_GetTick() - self->preTime > self->Config[self->tableNum].scanTime*100)
+      else if(HAL_GetTick() - self->preTime > self->Config[self->tableNum].scanTime*10)
       {
           if(self->Config[self->tableNum].table[self->scanNum + 1] == '\0')
           {
