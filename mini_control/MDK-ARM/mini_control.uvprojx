@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;..\Application\Drv;..\hxzp_Lib;..\Unit</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../Application/Drv;../hxzp_Lib;../Unit;../Application/App</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1363,10 +1363,52 @@
               <FileType>1</FileType>
               <FilePath>..\Application\App\Test.c</FilePath>
             </File>
+            <File>
+              <FileName>user_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\App\user_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>user_key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\App\user_key.h</FilePath>
+            </File>
+            <File>
+              <FileName>user_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\App\user_init.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Application/Drv</GroupName>
+          <Files>
+            <File>
+              <FileName>st7789.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Drv\st7789.c</FilePath>
+            </File>
+            <File>
+              <FileName>st7789.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\Drv\st7789.h</FilePath>
+            </File>
+            <File>
+              <FileName>drv_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Drv\drv_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Drv\drv_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Drv\drv_led.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Lib</GroupName>
@@ -1437,17 +1479,15 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>hxzp_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\hxzp_Lib\hxzp_list.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Unit</GroupName>
-          <Files>
-            <File>
-              <FileName>hxzp_list.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Unit\hxzp_list.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

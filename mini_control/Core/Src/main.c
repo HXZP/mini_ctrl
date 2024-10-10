@@ -24,7 +24,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "user_init.h"
+#include "drv_init.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,15 +63,31 @@ uint32_t RCC_Clock;
 
 void LCD_Cmd(uint8_t data)
 {
-	HAL_GPIO_WritePin(A0_GPIO_Port,A0_Pin,0);
+  HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,0);
+	HAL_GPIO_WritePin(LCD_A0_GPIO_Port,LCD_A0_Pin,0);
 	HAL_SPI_Transmit(&hspi1, &data, 1, 1000);
+  HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,1);
 }
 
 void LCD_Dat(uint8_t data)
 {
-	HAL_GPIO_WritePin(A0_GPIO_Port,A0_Pin,1);
+  HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,0);
+	HAL_GPIO_WritePin(LCD_A0_GPIO_Port,LCD_A0_Pin,1);
 	HAL_SPI_Transmit(&hspi1, &data, 1, 1000);
+  HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,1);
 }
+
+void HAL_Delay(uint32_t Delay)
+{
+  uint32_t time = 1000000;
+  while(time)
+  {
+    time--;
+  }
+  
+  
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -103,20 +120,40 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-#if 0	
-	HAL_GPIO_WritePin(RES_GPIO_Port,RES_Pin,1);
-	HAL_Delay(1);
-	HAL_GPIO_WritePin(RES_GPIO_Port,RES_Pin,0);
-	HAL_Delay(5);	
-	HAL_GPIO_WritePin(RES_GPIO_Port,RES_Pin,1);
+  Drv_Init();
+  User_Init();
+  
+#if 1	
+  HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,1);
+  
+  HAL_GPIO_WritePin(LCD_LED_GPIO_Port,LCD_LED_Pin,1);
 
+//	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,1);
+//	HAL_Delay(1);
+//	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,0);
+//	HAL_Delay(5);	
+//	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,1);
+  
+	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,1);
+	HAL_Delay(1);
+	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,0);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,1);
+	HAL_Delay(100);
+
+	LCD_Cmd(0x01);//sleep out
+	HAL_Delay(150);
+  
 	LCD_Cmd(0x11);//sleep out
-	HAL_Delay(10);
+	HAL_Delay(255);
 	
 	LCD_Cmd(0x36);
-	LCD_Dat(0x05);//左到右 上到下
-	
-	LCD_Cmd(0x20);//此命令用于从显示反转模式中恢复。
+	LCD_Dat(0x00);//左到右 上到下
+
+	LCD_Cmd(0x3A);
+	LCD_Dat(0x05);
+  
+//	LCD_Cmd(0x20);//此命令用于从显示反转模式中恢复。
 	
 	LCD_Cmd(0xb2);
 	LCD_Dat(0x0c);
@@ -183,17 +220,38 @@ int main(void)
 	LCD_Dat(0x16);
 	LCD_Dat(0x1c);
 
-
+  LCD_Cmd(0x21);
 	LCD_Cmd(0x29);//Display On
+//  HAL_Delay(150);
 
-	LCD_Cmd(0x2a);
-	LCD_Dat(0x00);
-	LCD_Dat(0x01);	
+//	LCD_Cmd(0x2a);
+//	LCD_Dat(0x00);
+//	LCD_Dat(0x00);	
+//	LCD_Dat(0x00);
+//	LCD_Dat(0x87);
+//	
+//	LCD_Cmd(0x2b);
+//	LCD_Dat(0x00);
+//	LCD_Dat(0x00);		
+//	LCD_Dat(0x00);
+//	LCD_Dat(0xF0);
+//  
+//  LCD_Cmd(0x2c);
+//  
+//  
+//  
+//  
+//	LCD_Cmd(0x2a);
+//	LCD_Dat(0x01);
+//	LCD_Dat(0x01);	
 
-	
-	LCD_Cmd(0x2b);
-	LCD_Dat(0x00);
-	LCD_Dat(0x01);		
+//	LCD_Cmd(0x2b);
+//	LCD_Dat(0x01);
+//	LCD_Dat(0x01);		
+//  
+//  LCD_Cmd(0x2c);
+//	LCD_Dat(0x01);
+//	LCD_Dat(0x01);  
 #endif
   /* USER CODE END 2 */
 
