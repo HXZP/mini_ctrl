@@ -40,4 +40,4 @@ mini_control/test.o: ..\Application\App\Test.c \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim_ex.h \
   ..\hxzp_Lib\hxzp_led.h C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\hxzp_Lib\hxzp_key.h
+  ..\hxzp_Lib\hxzp_key.h ..\Core\Inc\spi.h
