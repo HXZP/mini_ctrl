@@ -33,6 +33,14 @@ void LCD_Dat(uint8_t data)
   HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,1);
 }
 
+
+
+
+
+
+//uint8_t sdata[2700];
+
+#define BUFF 240
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */    
@@ -55,18 +63,18 @@ void StartDefaultTask(void *argument)
 //	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,1);
   
 	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,1);
-	HAL_Delay(100);
+	HAL_Delay(5);
 	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,0);
-	HAL_Delay(100);
+	HAL_Delay(5);
 	HAL_GPIO_WritePin(LCD_RES_GPIO_Port,LCD_RES_Pin,1);
-	HAL_Delay(100);
+	HAL_Delay(5);
   
   
 	LCD_Cmd(0x01);//sleep in
-	HAL_Delay(150);
+	HAL_Delay(10);
   
 	LCD_Cmd(0x11);//sleep out
-	HAL_Delay(150);
+	HAL_Delay(10);
   
   
 
@@ -76,7 +84,7 @@ void StartDefaultTask(void *argument)
 
 	LCD_Cmd(0x3A);
 	LCD_Dat(0x55);
-#if 0	  
+#if 1	  
 	LCD_Cmd(0x20);//此命令用于从显示反转模式中恢复。
 
 	LCD_Cmd(0xb2);
@@ -105,10 +113,10 @@ void StartDefaultTask(void *argument)
 	LCD_Dat(0x20);
 
 	LCD_Cmd(0x51);
-	LCD_Dat(0xFF);//亮度00-FF
+	LCD_Dat(0x0F);//亮度00-FF
 	
 	LCD_Cmd(0xc6);
-	LCD_Dat(0x3c);//40Hz
+	LCD_Dat(0x00);//40Hz
 	
 	LCD_Cmd(0xd0);//Power Control
 	LCD_Dat(0xa4);	
@@ -149,38 +157,7 @@ void StartDefaultTask(void *argument)
   HAL_Delay(150);
 
 
-	LCD_Cmd(0x2a);
-	LCD_Dat(0x00);
-	LCD_Dat(0x28);	
-	LCD_Dat(0x01);
-	LCD_Dat(0x17);//320 屏幕横
-	
-	LCD_Cmd(0x2b);
-	LCD_Dat(0x00);
-	LCD_Dat(0x35);		
-	LCD_Dat(0x00);
-	LCD_Dat(0xBC);//140 屏幕竖
-  
-  LCD_Cmd(0x2c);
-  
-	HAL_GPIO_WritePin(LCD_A0_GPIO_Port,LCD_A0_Pin,1);  
-  HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,0);
-//  HAL_Delay(1);
-
-  uint8_t data[2] = {0xFF,0xFF};
-  for (int i = 0; i < 240 * 135; i++) {
-    
-      HAL_SPI_Transmit(&hspi1, data, 2, 1000);
-  }
-  
-//   uint8_t data[2 * 240 * 135];
-//  for (int i = 0; i < 240 * 135 * 2; i++) {
-//    
-//      data[i] = 0xFF;
-//  } 
-//  HAL_SPI_Transmit(&hspi1, data, 240 * 135 * 2, 1000);
-  
-  HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,1);  
+//  uint8_t *sdata = malloc(240 * 135 * 2);
   
   
 //	LCD_Cmd(0x2a);
@@ -198,16 +175,91 @@ void StartDefaultTask(void *argument)
 //  hxzp_Led_insert("W0",0);
 //  hxzp_Led_insert("W1",0);
 //  hxzp_Led_insert("W2",0);
+
+  uint16_t data = 0x0000;
+  uint8_t  msg[BUFF];
+  
+  int32_t time = HAL_GetTick();int32_t errtime;
   /* Infinite loop */
+  
+  
+  
+    
+ 
+  
+  
   for(;;)
   {
     /*hz = 1000/lenght*delay 人类25*/
+    LCD_Cmd(0x2a);
+    LCD_Dat(0x00);
+    LCD_Dat(0x28);	
+    LCD_Dat(0x01);
+    LCD_Dat(0x17);//320 屏幕横
+    
+    LCD_Cmd(0x2b);
+    LCD_Dat(0x00);
+    LCD_Dat(0x35);		
+    LCD_Dat(0x00);
+    LCD_Dat(0xBC);//140 屏幕竖
+    
+    LCD_Cmd(0x2c);
+    HAL_GPIO_WritePin(LCD_A0_GPIO_Port,LCD_A0_Pin,1);  
+    HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,0);     
+    
 
-    
-    
-    
+//  HAL_Delay(1);
 
-    osDelay(1);
+//    for (int i = 0; i < 2700; i++) {
+//      
+//      if(!(i%2))sdata[i] = (uint8_t)(data&0xFF00>>8);
+//      if(i%2)sdata[i+1] = (uint8_t)(data&0x00FF); 
+//      
+//    }
+//    
+//    for (int i = 0; i < 24; i++) {
+
+//      HAL_SPI_Transmit_DMA(&hspi1, sdata, 2700);
+//    }   
+
+//    HAL_SPI_Transmit_DMA(&hspi1, sdata, 2 * 240 * 135);
+
+
+    for (int i = 0; i < BUFF / 2; i++) {
+      
+      msg[i*2] = (uint8_t)((data&0xFF00)>>8);
+      msg[i*2+1] = (uint8_t)(data&0x00FF); 
+    }
+    
+    for (int i = 0; i < 64800 / BUFF; i++) {
+//      for (int j = 0; j < 10; j++){}
+        
+
+        {
+          HAL_SPI_Transmit_DMA(&hspi1, msg, BUFF);
+          LCD_tcFlagReset();
+        }
+        while(!LCD_tcFlagGet());
+        
+//      HAL_SPI_Transmit(&hspi1, msg, BUFF, 1000);   
+ //       continue;
+    }
+    
+//        HAL_SPI_Transmit(&hspi1, msg, 648, 1000);    
+    
+//    errtime = time - HAL_GetTick();
+//   uint8_t data[2 * 240 * 135];
+//  for (int i = 0; i < 240 * 135 * 2; i++) {
+//    
+//      data[i] = 0xFF;
+//  } 
+//  HAL_SPI_Transmit(&hspi1, data, 240 * 135 * 2, 1000);
+  
+    HAL_GPIO_WritePin(LCD_CS_GPIO_Port,LCD_CS_Pin,1);      
+
+    data++;
+    
+    osDelay(10);
   }
   /* USER CODE END StartDefaultTask */
 }

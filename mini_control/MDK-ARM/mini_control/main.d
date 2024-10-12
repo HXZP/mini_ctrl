@@ -37,9 +37,10 @@ mini_control/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM3\portmacro.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
-  ..\Core\Inc\spi.h ..\Core\Inc\gpio.h ..\Application\App\user_init.h \
-  ..\Application\App\user_key.h ..\Application\Drv\drv_key.h \
-  ..\hxzp_Lib\hxzp_lib.h ..\hxzp_Lib\hxzp_list.h \
+  ..\Core\Inc\dma.h ..\Core\Inc\spi.h ..\Core\Inc\gpio.h \
+  ..\Application\App\user_init.h ..\Application\App\user_key.h \
+  ..\Application\Drv\drv_key.h ..\hxzp_Lib\hxzp_lib.h \
+  ..\hxzp_Lib\hxzp_list.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h ..\hxzp_Lib\hxzp_led.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h ..\hxzp_Lib\hxzp_key.h \
   ..\Application\Drv\drv_init.h ..\Application\Drv\drv_led.h
