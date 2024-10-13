@@ -40,7 +40,8 @@ void LCD_Dat(uint8_t data)
 
 //uint8_t sdata[2700];
 
-#define BUFF 240
+#define BUFF 2700
+  uint8_t  msg[BUFF];
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */    
@@ -177,7 +178,7 @@ void StartDefaultTask(void *argument)
 //  hxzp_Led_insert("W2",0);
 
   uint16_t data = 0x0000;
-  uint8_t  msg[BUFF];
+
   
   int32_t time = HAL_GetTick();int32_t errtime;
   /* Infinite loop */

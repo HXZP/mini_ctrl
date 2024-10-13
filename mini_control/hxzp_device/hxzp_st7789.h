@@ -1,10 +1,9 @@
 /*
-ä½¿ç”¨å±å¹•ä¸ºæ–°
-Data:
-135*240
-8pin
+Ê¹ÓÃÆÁÄ»ÎªÐÂÖÇ¾°135*240£¬spi£¬²å½Ó°æ
+ÆÁÄ»´óÐ¡ 135*240
+Òý½Å8pin
 
-PinMapï¼š
+PinMap£º
 1.LEDA
 2.GND
 3.RESET
@@ -13,11 +12,6 @@ PinMapï¼š
 6.SCL
 7.VDD
 8.CS
-
-PC5 RES
-PA5 SCK
-PA7 SDA
-PC4 A0(WRX)
 
 Congfigue:
 - Half-Duplex
@@ -42,18 +36,116 @@ Mode Enter
 input/output 1), and WRX (serial data input 2). To enter this interface, command E7h need set 10h.
 
 Reset
-RESä½Žç”µå¹³æœ‰æ•ˆ
-ä¸Šç”µæ‹‰ç”µå¹³å¤ä½æ“ä½œï¼Œä½Žç”µå¹³è‡³å°‘è¦10usï¼Œç„¶åŽè¿›å…¥å¤ä½æ¨¡å¼ï¼Œéœ€è¦ç­‰å¾…5mså®Œæˆåˆå§‹åŒ–
+RESµÍµçÆ½ÓÐÐ§
+ÉÏµçÀ­µçÆ½¸´Î»²Ù×÷£¬µÍµçÆ½ÖÁÉÙÒª10us£¬È»ºó½øÈë¸´Î»Ä£Ê½£¬ÐèÒªµÈ´ý5msÍê³É³õÊ¼»¯
 
-è¯¥æ¨¡å—æœ‰ä¸‰ç§é¢œè‰²æ¨¡å¼ï¼Œç”¨äºŽå°†æ•°æ®ä¼ è¾“åˆ°æ˜¾ç¤º RAMã€‚
-è¿™äº›æ˜¯æ¯åƒç´  12 ä½é¢œè‰²ã€æ¯åƒç´  16 ä½é¢œè‰²å’Œæ¯åƒç´  18 ä½é¢œè‰²ã€‚
-æè¿°äº†æ¯ä¸ªæŽ¥å£çš„æ•°æ®æ ¼å¼ã€‚å¯ä»¥é€šè¿‡ 2 ç§æ–¹æ³•å°†æ•°æ®ä¸‹è½½åˆ°å¸§å†…å­˜ä¸­ã€‚
+¸ÃÄ£¿éÓÐÈýÖÖÑÕÉ«Ä£Ê½£¬ÓÃÓÚ½«Êý¾Ý´«Êäµ½ÏÔÊ¾ RAM¡£
+ÕâÐ©ÊÇÃ¿ÏñËØ 12 Î»ÑÕÉ«¡¢Ã¿ÏñËØ 16 Î»ÑÕÉ«ºÍÃ¿ÏñËØ 18 Î»ÑÕÉ«¡£
+ÃèÊöÁËÃ¿¸ö½Ó¿ÚµÄÊý¾Ý¸ñÊ½¡£¿ÉÒÔÍ¨¹ý 2 ÖÖ·½·¨½«Êý¾ÝÏÂÔØµ½Ö¡ÄÚ´æÖÐ¡£
 
+ram 240*320
+F0
+240           0 
++-------------+0
+|             |
+|             |
+|             |
+|             |
+|             |
+|             |
+|             |
+|             |
+|             |
++-------------+320 140
+
+×¢ÒâµØÖ·ÆðÊ¼
+
+BC<--35H
+135  1
++----+1   28H      
+|    |     |
+|    |     |
+|    |     | 
+|    |     | 
+|    |     v
++----+240 117H 
+
+3240
+64800 
 */
 #ifndef HXZP_ST7789_H
 #define HXZP_ST7789_H
 
 #include "stdlib.h"
+#include "stdint.h"
+
+#define LCD_Width  240
+#define LCD_HEIGHT 135
+#define LCD_AREA   3240
+#define LCD_DATA_LEN   64800
+
+
+
+/*ÆðÊ¼µØÖ·ºÍ½áÊøµØÖ·*/
+#define LCD_ADRR_WSTART 0x28
+#define LCD_ADRR_WEND   0x117
+#define LCD_ADRR_HSTART 0x35
+#define LCD_ADRR_HEND   0xBC
+
+#define WHITE         	 0xFFFF
+#define BLACK         	 0x0000	  
+#define BLUE           	 0x001F  
+#define BRED             0XF81F
+#define GRED 			 0XFFE0
+#define GBLUE			 0X07FF
+#define RED           	 0xF800
+#define MAGENTA       	 0xF81F
+#define GREEN         	 0x07E0
+#define CYAN          	 0x7FFF
+#define YELLOW        	 0xFFE0
+#define BROWN 			 0XBC40 //×ØÉ«
+#define BRRED 			 0XFC07 //×ØºìÉ«
+#define GRAY  			 0X8430 //»ÒÉ«
+#define DARKBLUE      	 0X01CF	//ÉîÀ¶É«
+#define LIGHTBLUE      	 0X7D7C	//Ç³À¶É«  
+#define GRAYBLUE       	 0X5458 //»ÒÀ¶É«
+#define LIGHTGREEN     	 0X841F //Ç³ÂÌÉ«
+#define LGRAY 			 0XC618 //Ç³»ÒÉ«(PANNEL),´°Ìå±³¾°É«
+#define LGRAYBLUE        0XA651 //Ç³»ÒÀ¶É«(ÖÐ¼ä²ãÑÕÉ«)
+#define LBBLUE           0X2B12 //Ç³×ØÀ¶É«(Ñ¡ÔñÌõÄ¿µÄ·´É«)
+
+
+typedef enum
+{
+    ST7798_GPIOL = 0,    
+    ST7798_GPIOH,
+    /* data */
+}st7789_gpio_sta;
+
+
+
+typedef struct hxzp_st7789_t
+{
+
+    void (*setCS)(uint8_t state);
+    void (*setA0)(uint8_t state);
+    void (*setLED)(uint8_t state);
+    void (*setRES)(uint8_t state);
+
+    void (*write)(uint8_t *data, uint16_t len);
+    void (*writeByte)(uint8_t data);
+
+}hxzp_st7789;
+
+
+
+
+
+
+
+
+
+
 
 
 #endif // HXZP_ST7789_H
