@@ -1,7 +1,7 @@
 #include "user_key.h"
 
 
-
+extern uint8_t refresh;
 
 void Key_Event_CW(uint8_t state)
 {
@@ -11,7 +11,6 @@ void Key_Event_CW(uint8_t state)
       break;
 
     case KEY_PRESS:
-      
       hxzp_Led_piece("W0","A0",50,1,0,1);
       break;
     

@@ -6,5 +6,6 @@ void Drv_Init(void)
 {
   Drv_Led_Init();  
   Drv_Key_Init();
+  Drv_Lcd_Init();
 }
 

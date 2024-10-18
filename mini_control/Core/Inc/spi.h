@@ -41,9 +41,7 @@ extern SPI_HandleTypeDef hspi1;
 void MX_SPI1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void LCD_tcFlagReset(void);
-uint8_t LCD_tcFlagGet(void);
-void LCD_tcFlagSet(void);
+uint8_t USER_SPI_GetDmaTCFlag(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

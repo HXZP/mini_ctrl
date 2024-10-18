@@ -56,7 +56,7 @@ void MX_SPI1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN SPI1_Init 2 */
-//  HAL_DMA_RegisterCallback(&hdma_spi1_tx,HAL_DMA_XFER_CPLT_CB_ID,LCD_tcFlagSet);
+
   /* USER CODE END SPI1_Init 2 */
 
 }
@@ -132,20 +132,13 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
 }
 
 /* USER CODE BEGIN 1 */
-uint8_t lcd_tcFlag = 1;
-void LCD_tcFlagReset(void)
+uint8_t USER_SPI_GetDmaTCFlag(void)
 {
-  lcd_tcFlag = 0;
-}
+    if((((hdma_spi1_tx.DmaBaseAddress->ISR & (DMA_FLAG_TC1 << hdma_spi1_tx.ChannelIndex)) != RESET) && ((hdma_spi1_tx.Instance->CCR & DMA_IT_TC) != RESET)))
+    {
+        return 1;
+    }
 
-void LCD_tcFlagSet(void)
-{
-  if((((hdma_spi1_tx.DmaBaseAddress->ISR & (DMA_FLAG_TC1 << hdma_spi1_tx.ChannelIndex)) != RESET) && ((hdma_spi1_tx.Instance->CCR & DMA_IT_TC) != RESET)))
-    lcd_tcFlag = 1;
-}
-
-uint8_t LCD_tcFlagGet(void)
-{
-  return lcd_tcFlag;
+    return 0;
 }
 /* USER CODE END 1 */

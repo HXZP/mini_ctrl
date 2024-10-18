@@ -2,6 +2,8 @@
 
 #include "hxzp_led.h"
 
+#include "FreeRTOS.h"
+#include "cmsis_os.h"
 
 static List* LedList;
 
@@ -17,12 +19,12 @@ void StartLedTask(void *argument)
     for(List *node = LedList->next; node != NULL; node = node->next)
     {
       self = (Led*)(node->data);
-           
+
       /*计算下一动作时间*/
       if(self->preTime == 0)
       {
         self->busy = 1;
-        
+
         self->preTime = HAL_GetTick();
       }
       else if(HAL_GetTick() - self->preTime > self->Config[self->tableNum].scanTime*10)
@@ -252,7 +254,7 @@ void hxzp_Led_piece(const char *name,const char *light,uint8_t sacnTime,uint8_t 
         self->Config[self->ConfigNum-1].scanTime = sacnTime;
         self->Config[self->ConfigNum-1].priority = priority;
         self->Config[self->ConfigNum-1].loop = loop;
-               
+
         if(insert && self->Config[self->ConfigNum-1].loop == 0)
         {
           self->insertUse = 1;

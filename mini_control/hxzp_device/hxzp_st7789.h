@@ -70,8 +70,15 @@ BC<--35H
 |    |     v
 +----+240 117H 
 
-3240
-64800 
+数据长度
+屏幕像素点数量3240
+屏幕数据长度64800 
+
+使用RGB色彩 [ RRRRR | GGGGGG | BBBBB ]
+红色：5位，范围是 0 - 31
+绿色：6位，范围是 0 - 63
+蓝色：5位，范围是 0 - 31
+
 */
 #ifndef HXZP_ST7789_H
 #define HXZP_ST7789_H
@@ -79,10 +86,17 @@ BC<--35H
 #include "stdlib.h"
 #include "stdint.h"
 
-#define LCD_Width  240
-#define LCD_HEIGHT 135
-#define LCD_AREA   3240
-#define LCD_DATA_LEN   64800
+#include "FreeRTOS.h"
+#include "cmsis_os.h"
+#include "main.h"
+
+#define LCD_Width      240
+#define LCD_HEIGHT     135
+#define LCD_AREA       LCD_Width*LCD_HEIGHT //32400
+
+#define LCD_DATA_LEN          LCD_AREA*2                     //数据长度 64800
+#define LCD_DATA_TX_TIMES     100                            //传输次数
+#define LCD_DATA_BUFF_LEN     LCD_DATA_LEN/LCD_DATA_TX_TIMES //一次传输数量 648
 
 
 
@@ -90,27 +104,27 @@ BC<--35H
 #define LCD_ADRR_WSTART 0x28
 #define LCD_ADRR_WEND   0x117
 #define LCD_ADRR_HSTART 0x35
-#define LCD_ADRR_HEND   0xBC
+#define LCD_ADRR_HEND   0xBB
 
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000	  
 #define BLUE           	 0x001F  
 #define BRED             0XF81F
-#define GRED 			 0XFFE0
-#define GBLUE			 0X07FF
+#define GRED 			       0XFFE0
+#define GBLUE			       0X07FF
 #define RED           	 0xF800
 #define MAGENTA       	 0xF81F
 #define GREEN         	 0x07E0
 #define CYAN          	 0x7FFF
 #define YELLOW        	 0xFFE0
-#define BROWN 			 0XBC40 //棕色
-#define BRRED 			 0XFC07 //棕红色
-#define GRAY  			 0X8430 //灰色
+#define BROWN 			     0XBC40 //棕色
+#define BRRED 			     0XFC07 //棕红色
+#define GRAY  			     0X8430 //灰色
 #define DARKBLUE      	 0X01CF	//深蓝色
 #define LIGHTBLUE      	 0X7D7C	//浅蓝色  
 #define GRAYBLUE       	 0X5458 //灰蓝色
 #define LIGHTGREEN     	 0X841F //浅绿色
-#define LGRAY 			 0XC618 //浅灰色(PANNEL),窗体背景色
+#define LGRAY 			     0XC618 //浅灰色(PANNEL),窗体背景色
 #define LGRAYBLUE        0XA651 //浅灰蓝色(中间层颜色)
 #define LBBLUE           0X2B12 //浅棕蓝色(选择条目的反色)
 
@@ -122,30 +136,59 @@ typedef enum
     /* data */
 }st7789_gpio_sta;
 
-
+typedef struct hxzp_st7789_rgb_t
+{
+    uint16_t R:5;//31
+    uint16_t G:6;//63
+    uint16_t B:5;//31
+} hxzp_st7789_rgb;
 
 typedef struct hxzp_st7789_t
 {
+    uint8_t buff[LCD_DATA_BUFF_LEN];
 
+    struct
+    {
+        uint8_t initFlag       : 2;
+        uint8_t inTransmission : 1;
+        uint8_t reserve        : 5;
+        /* data */
+    };
+    
     void (*setCS)(uint8_t state);
     void (*setA0)(uint8_t state);
     void (*setLED)(uint8_t state);
     void (*setRES)(uint8_t state);
 
     void (*write)(uint8_t *data, uint16_t len);
-    void (*writeByte)(uint8_t data);
 
+    uint8_t (*getTc)(void);
+    
 }hxzp_st7789;
 
+typedef uint8_t (*getTcFlag)(void);
+typedef void (*gpioReg)(uint8_t state);
+typedef void (*writeReg)(uint8_t *data, uint16_t len);
 
+void hxzp_st7789_InitReg(gpioReg CS,gpioReg A0,gpioReg LED,gpioReg RES,writeReg write);
 
+void hxzp_st7789_GetTcReg(getTcFlag getflag);
 
+uint8_t hxzp_st7789_TxLockGet(void);
 
+void hxzp_st7789_TxLockRelease(void);
 
+void hxzp_st7789_SetBackground(uint16_t color);
 
-
-
-
-
+void hxzp_st7789_SetWindow(uint16_t xstart, uint16_t ystart, uint16_t xend, uint16_t yend);
 
 #endif // HXZP_ST7789_H
+
+
+
+
+
+
+
+
+
