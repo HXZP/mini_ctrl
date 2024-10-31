@@ -60,7 +60,6 @@
 "mini_control\usbd_ioreq.o"
 "mini_control\usbd_cdc.o"
 "mini_control\bsp_driver_sd.o"
-"mini_control\fatfs_platform.o"
 "mini_control\fatfs.o"
 "mini_control\diskio.o"
 "mini_control\ff.o"

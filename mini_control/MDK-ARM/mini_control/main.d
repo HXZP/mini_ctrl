@@ -46,7 +46,6 @@ mini_control/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Middlewares\Third_Party\FatFs\src\ff.h \
   ..\Middlewares\Third_Party\FatFs\src\integer.h \
   ..\FATFS\Target\ffconf.h ..\FATFS\Target\bsp_driver_sd.h \
-  ..\FATFS\Target\fatfs_platform.h \
   ..\Middlewares\Third_Party\FatFs\src\ff_gen_drv.h \
   ..\Middlewares\Third_Party\FatFs\src\diskio.h \
   ..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio.h \
