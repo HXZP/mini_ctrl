@@ -49,6 +49,7 @@
 "mini_control\hxzp_led.o"
 "mini_control\hxzp_key.o"
 "mini_control\hxzp_list.o"
+"mini_control\hxzp_ringbuff.o"
 "mini_control\hxzp_st7789.o"
 "mini_control\delay.o"
 "mini_control\usb_device.o"

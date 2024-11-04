@@ -1866,6 +1866,11 @@
               <FileType>1</FileType>
               <FilePath>..\hxzp_Lib\hxzp_list.c</FilePath>
             </File>
+            <File>
+              <FileName>hxzp_ringbuff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\hxzp_Lib\hxzp_ringbuff.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
