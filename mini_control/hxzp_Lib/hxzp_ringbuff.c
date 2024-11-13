@@ -30,7 +30,6 @@ uint8_t ringbuff_getIsEmpty(ringbuff* buff)
     {
         return 0;    
     }
-
 }
 
 

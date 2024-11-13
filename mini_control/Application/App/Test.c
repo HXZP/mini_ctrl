@@ -11,6 +11,10 @@
 #include "fatfs.h"
 #include "sdio.h"
 
+#include "usb_device.h"
+#include "usbd_cdc_if.h"
+
+#include "sys_time.h"
 /*
 
 led设计 通过外部传入亮度表以及读表速度 加入优先级 加入在忙状态
@@ -46,7 +50,7 @@ void read_write_file(void) {
 
   uint8_t data[20];
   uint8_t dataR[20];
-uint8_t res = 0;uint8_t res1 = 0;uint8_t res2 = 0;uint8_t res3 = 0;
+uint8_t res = 0;uint8_t res1 = 0;uint32_t res2 = 0;uint32_t res3 = 0;uint32_t res4 = 0;
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */    
@@ -57,36 +61,39 @@ void StartDefaultTask(void *argument)
   hxzp_Led_set("W1",2);
   hxzp_Led_set("W2",2);
  
-  
+  MX_USB_DEVICE_Init();
 //  if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) {}
 
-  res = f_mount(&SDFatFS, SDPath, 1);
+//  res = f_mount(&SDFatFS, SDPath, 1);
   
-  if(res)
-  {
-    while(1);
-  }
-  
-  for(uint8_t i = 0;i<20;i++)
-  {
-    data[i] = i;
-  }  
+//  if(res)
+//  {
+//    while(1);
+//  }
+//  
+//  for(uint8_t i = 0;i<20;i++)
+//  {
+//    data[i] = i;
+//  }  
   
 
   for(;;)
   {
-    res2++;
-   if(!res1){
-   
-   read_write_file();//res1 = 1;
-   } 
+//    res2++;
+//   if(!res1){
+//   
+//   read_write_file();//res1 = 1;
+//   } 
     
-    
+//    CDC_Transmit_FS((uint8_t*)"hello\r",6);
     
 //      NVIC_SystemReset();
     
-
-
+    res2 = sys_getSys_us();
+    res3 = sys_getSys_ms();
+    res4 = sys_getSys_s();
+    
+    
 //    hxzp_Led_piece("W2","A0",50,1,0,1);
     
 //    f_mount(&SDFatFS, SDPath, 1);
@@ -125,7 +132,7 @@ void StartDefaultTask(void *argument)
     
 //    if(HAL_SD_ReadBlocks_DMA(&hsd,dataR,1,1))while(1);
 //    osThreadExit();
-    osDelay(3000);
+    osDelay(1000);
   }
   /* USER CODE END StartDefaultTask */
 }

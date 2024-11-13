@@ -1887,9 +1887,9 @@
           <GroupName>Unit</GroupName>
           <Files>
             <File>
-              <FileName>delay.c</FileName>
+              <FileName>sys_time.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Unit\delay.c</FilePath>
+              <FilePath>..\Unit\sys_time.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,5 +1,4 @@
 #include "drv_lcd.h"
-#include "delay.h"
 
 void Drv_Lcd_CS(uint8_t state)
 {

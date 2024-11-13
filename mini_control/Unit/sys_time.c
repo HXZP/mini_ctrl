@@ -1,7 +1,7 @@
-#include "delay.h"
+#include "sys_time.h"
 
 
-void delay_us(uint16_t us)
+void sys_delay_us(uint16_t us)
 {
   uint32_t tick = HAL_RCC_GetSysClockFreq() / 1000000  * us ;
   
@@ -11,8 +11,6 @@ void delay_us(uint16_t us)
   
   while(1)
   {
-      
-    
       if(SysTick->VAL > tick_pre)
       {
           tick_record += 0xFFFFFF + tick_pre - SysTick->VAL;
@@ -31,7 +29,7 @@ void delay_us(uint16_t us)
   }
 }
 
-void delay_ms(uint16_t ms)
+void sys_delay_ms(uint16_t ms)
 {
   uint32_t tick = HAL_RCC_GetSysClockFreq() / 1000  * ms ;
   
@@ -60,4 +58,20 @@ void delay_ms(uint16_t ms)
   }
 }
 
+uint32_t sys_getSys_us(void)
+{
+  volatile uint32_t tick = HAL_GetTick();
+  volatile uint32_t val  = SysTick->VAL;
+  
+  return tick * 1000 + (SysTick->LOAD+1 - val)*1000/HAL_RCC_GetSysClockFreq();
+}
 
+uint32_t sys_getSys_ms(void)
+{
+  return sys_getSys_us()/1000;
+}
+
+uint32_t sys_getSys_s(void)
+{
+  return sys_getSys_ms()/1000;
+}

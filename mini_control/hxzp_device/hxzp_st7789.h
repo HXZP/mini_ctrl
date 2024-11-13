@@ -94,8 +94,8 @@ BC<--35H
 #define LCD_HEIGHT     135
 #define LCD_AREA       LCD_Width*LCD_HEIGHT //32400
 
+#define LCD_DATA_TX_TIMES     5                            //传输次数
 #define LCD_DATA_LEN          LCD_AREA*2                     //数据长度 64800
-#define LCD_DATA_TX_TIMES     100                            //传输次数
 #define LCD_DATA_BUFF_LEN     LCD_DATA_LEN/LCD_DATA_TX_TIMES //一次传输数量 648
 
 

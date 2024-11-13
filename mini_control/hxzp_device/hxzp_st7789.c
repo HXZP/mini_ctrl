@@ -161,7 +161,7 @@ void hxzp_st7789_SetBackground(uint16_t color)
         return;
     }
     
-    hxzp_st7789_SetWindow(0,0,LCD_Width-1,LCD_HEIGHT-1);
+    hxzp_st7789_SetWindow(0,0,LCD_Width/2-1,LCD_HEIGHT/2-1);
 
     LCD.setCS(ST7798_GPIOL);
     LCD.setA0(ST7798_GPIOH);
@@ -277,11 +277,11 @@ static void hxzp_st7789_Init(void)
     hxzp_st7789_Commad(0x20);//此命令用于从显示反转模式中恢复。
 
     hxzp_st7789_Commad(0xb2);// 设置帧率控制
-    hxzp_st7789_Data(0x0c);
-    hxzp_st7789_Data(0x0c);
+    hxzp_st7789_Data(0x01);
+    hxzp_st7789_Data(0x01);
     hxzp_st7789_Data(0x00);
-    hxzp_st7789_Data(0x33);
-    hxzp_st7789_Data(0x33);
+    hxzp_st7789_Data(0x01);
+    hxzp_st7789_Data(0x01);
     
     hxzp_st7789_Commad(0xb7);// 设置电源控制
     hxzp_st7789_Data(0x35);	
@@ -375,7 +375,7 @@ void StartLcdTask(void *argument)
 //        if(xs > LCD_Width)xs = 0;if(xe > LCD_Width)xe = 0;if(ys > LCD_HEIGHT)ys = 0;if(ye > LCD_HEIGHT)ye = 0;
       
       
-        osDelay(1000);
+        osDelay(10);
     }
 }
 

@@ -51,7 +51,7 @@
 "mini_control\hxzp_list.o"
 "mini_control\hxzp_ringbuff.o"
 "mini_control\hxzp_st7789.o"
-"mini_control\delay.o"
+"mini_control\sys_time.o"
 "mini_control\usb_device.o"
 "mini_control\usbd_desc.o"
 "mini_control\usbd_cdc_if.o"
