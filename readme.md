@@ -1,3 +1,5 @@
+# 已解决问题
+
 ## 烧录调试
 
 芯片无法识别问题，无法烧录
@@ -16,53 +18,38 @@
 
 原因：协议理解问题，设置区域后要发送颜色，颜色才是实际数据，设置区域只是选择更新范围
 
-## SD卡调试
-
-sd卡无法通信，更改上拉电阻47K到10K后依旧无法通信，表现为无法正常挂载，debug发现无法通信
-
-高速率下要使用dma
-
-其实也可以不用dma，发送和接收记得while
-
-修改了堆栈后可以勉强使用fafts
-
-
-
 ##  cubemx生成错误
 
-### 1、更换Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS中的ARM_CM3为副本
+1、更换Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS中的ARM_CM3为副本
 
-### 2、sd卡相关：Middlewares\Third_Party\FatFs\src\option中syscall.c更改
+ 2、sd卡相关：Middlewares\Third_Party\FatFs\src\option中syscall.c更改
 
-```c
-int ff_cre_syncobj (	/* TRUE:Function succeeded, FALSE:Could not create due to any error */
-	BYTE vol,			/* Corresponding logical drive being processed */
-	_SYNC_t *sobj		/* Pointer to return the created sync object */
-)
-{
-  int ret;
+# 进度
 
-  osSemaphoreDef(SEM);
-  *sobj = osSemaphoreNew(1,1,osSemaphore(SEM));
-  ret = (*sobj != NULL);
+烧录
 
-  return ret;
-}
-```
+freertos
 
-```c
-int ff_req_grant (	/* TRUE:Got a grant to access the volume, FALSE:Could not get a grant */
-	_SYNC_t sobj	/* Sync object to wait */
-)
-{
-  int ret = 0;
+led
 
-  if(osSemaphoreAcquire(sobj, _FS_TIMEOUT) == osOK)
-  {
-    ret = 1;
-  }
+按键
 
-  return ret;
-}
-```
+lcd刷屏
 
+sd卡+fatfs
+
+usb串口
+
+# TODO
+
+串口系统
+
+lcd字符显示
+
+sd卡数据文件系统设计
+
+usb通信以及切换hid功能
+
+tof
+
+imu焊接
