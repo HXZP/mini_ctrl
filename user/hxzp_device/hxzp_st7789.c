@@ -1,11 +1,11 @@
 #include "hxzp_st7789.h"
 #include <time.h>
-#include "sys_time.h"
+#include "system.h"
 
-void StartLcdTask(void *argument);
 
 hxzp_st7789 LCD;
 
+void StartLcdTask(void *argument);
 
 
 
@@ -221,7 +221,7 @@ void hxzp_st7789_SetPoint(uint16_t x, uint16_t y, uint16_t color)
     LCD.buff[0]  = (uint8_t)(color>>8);
     LCD.buff[1]  = (uint8_t)(color&0xFF);
 
-    hxzp_st7789_Write(LCD.buff, 1);
+    hxzp_st7789_Write(LCD.buff, 2);
     
     LCD.setCS(ST7798_GPIOH);
     
@@ -384,11 +384,11 @@ void StartLcdTask(void *argument)
     for(;;)
     {
         
-        color.R++;
-        color.G++;
-        color.B++;
-      
-        hxzp_st7789_SetBackground(*(uint16_t*)(&color));
+//        color.R++;
+//        color.G++;
+//        color.B++;
+//      
+//        hxzp_st7789_SetBackground(*(uint16_t*)(&color));
 
 //        hxzp_st7789_SetTran(xs++,xe+++1,ys++,ye+++1, RED);
 //        

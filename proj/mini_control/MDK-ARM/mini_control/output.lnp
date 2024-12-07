@@ -74,7 +74,7 @@
 "mini_control\syscall.o"
 "mini_control\sd_diskio.o"
 "mini_control\eventrecorder.o"
---library_type=microlib --strict --scatter "mini_control\mini_control.sct"
+--library_type=microlib --strict --scatter "mini_control\output.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
---list "mini_control.map" -o mini_control\mini_control.axf
+--list "output.map" -o mini_control\output.axf

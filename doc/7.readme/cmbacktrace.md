@@ -76,3 +76,10 @@ R12: 000003e8  LR : 080110af  PC : 0800fea4  PSR: 41000000
 
 ![Snipaste_2024-11-30_11-18-49](D:\Aproject\foc\mini_ctrl\doc\7.readme\pictrue\Snipaste_2024-11-30_11-18-49.png)
 
+
+
+通过include进行复制
+
+![image-20241203003111661](D:\Aproject\foc\mini_ctrl\doc\7.readme\pictrue\image-20241203003111661.png)
+
+![image-20241203003135646](D:\Aproject\foc\mini_ctrl\doc\7.readme\pictrue\image-20241203003135646.png)

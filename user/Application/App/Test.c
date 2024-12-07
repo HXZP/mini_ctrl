@@ -16,13 +16,15 @@
 #include "usb_device.h"
 #include "usbd_cdc_if.h"
 
-#include "sys_time.h"
+#include "system.h"
 
 #include "task.h"
 
 #include <stdlib.h>
 
 #include <stdio.h>
+
+#include "hxzp_st7789.h"
 //#include "WouoUI_user.h"
 //#include "WouoUI.h"
 /*
@@ -30,7 +32,7 @@
 led设计 通过外部传入亮度表以及读表速度 加入优先级 加入在忙状态
 
 */
-
+//https://blog.csdn.net/fhb1922702569/article/details/91368360/
 char name[] = "test";
 char num[4];
 char docId[] = ".dat";
@@ -74,11 +76,6 @@ void read_write_file(void) {
 
 
  
-int fputc(int ch, FILE *f)//串口重定向
-{
-    HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,1000);
-    return ch;
-}
 
 
 
@@ -100,38 +97,26 @@ int fputc(int ch, FILE *f)//串口重定向
 //    }
 //    return(ch);
 //}
-
-uint32_t getTick = 0;
-void vApplicationIdleHook(void)
+const uint8_t font16_16[4][32] = 
 {
-	/*
-		1.执行低优先级，或后台需要不停处理的功能代码
-		2.测试系统处理裕量（内核执行空闲任务时间越长表示内核越空闲）
-		3.将处理器配置到低功耗模式（Tickless模式）
-	*/
-  if(HAL_GetTick() - getTick > 100)
-  {
-  
-  char *buffer = (char*)malloc(256);
-  vTaskList(buffer);
-  
-  printf("///////////////////////\r\n");
-  printf("%s",buffer);
-  
-  
-  free(buffer);
-  
-  getTick = HAL_GetTick();
-  }
-}
-
-
-
-
+  {0x08,0x80,0x08,0x80,0x08,0x84,0x10,0x88,0x10,0x90,0x30,0xA0,0x30,0xC0,0x50,0x80,0x91,0x80,0x12,0x80,0x14,0x80,0x10,0x82,0x10,0x82,0x10,0x82,0x10,0x7E,0x10,0x00},/*"化",0*/
+  {0x22,0x08,0x11,0x08,0x11,0x10,0x00,0x20,0x7F,0xFE,0x40,0x02,0x80,0x04,0x1F,0xE0,0x00,0x40,0x01,0x80,0xFF,0xFE,0x01,0x00,0x01,0x00,0x01,0x00,0x05,0x00,0x02,0x00},/*"学",1*/
+  {0x04,0x04,0x24,0x04,0x24,0x04,0x3F,0xA4,0x44,0x24,0x04,0x24,0xFF,0xE4,0x04,0x24,0x04,0x24,0x3F,0xA4,0x24,0xA4,0x24,0xA4,0x26,0x84,0x25,0x04,0x04,0x14,0x04,0x08},/*"制",2*/
+  {0x00,0x00,0x1F,0xF0,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x1F,0xF0,0x00,0x00,0x00,0x00,0x7C,0x7C,0x44,0x44,0x44,0x44,0x44,0x44,0x44,0x44,0x7C,0x7C,0x44,0x44},/*"品",3*/
+};
+//00001000 10000000
 char str[] = "nb sb\r";
 uint8_t data[20];
 uint8_t dataR[20];
-uint8_t res = 0;uint8_t res1 = 0;uint32_t res2 = 0;uint32_t res3 = 0;uint32_t res4 = 0;
+uint8_t res = 0;
+uint8_t res1 = 0;
+uint32_t res2 = 0;
+uint32_t res3 = 0;
+uint32_t res4 = 0;
+
+uint32_t x = 0;
+uint32_t y = 0;
+uint8_t word = 0;
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */    
@@ -142,14 +127,14 @@ void StartDefaultTask(void *argument)
 //  hxzp_Led_set("W1",2);
 //  hxzp_Led_set("W2",2);
  
-//  MX_USB_DEVICE_Init();
+  
   
   
 //  TestUI_Init();
   
 //  if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) {}
 
-  res = f_mount(&SDFatFS, SDPath, 1);
+//  res = f_mount(&SDFatFS, SDPath, 1);
   
 //  if(res)
 //  {
@@ -169,7 +154,49 @@ void StartDefaultTask(void *argument)
 //   
     
     
-   read_write_file();//res1 = 1;
+//   read_write_file();//res1 = 1;
+    
+    
+    
+
+    
+    for(uint16_t wordNum = 0;wordNum < 4;wordNum++)
+    {
+      for(uint16_t wordIdex = 0;wordIdex < 32;wordIdex++)
+      {
+        word = font16_16[wordNum][wordIdex];
+        for(uint16_t wordBit = 0;wordBit < 8;wordBit++)
+        {
+           x = wordNum * 16 + (wordIdex % 2) * 8 + wordBit; 
+           y = wordIdex / 2;
+          
+           if(font16_16[wordNum][wordIdex] & (0x80 >> wordBit))
+           {
+              hxzp_st7789_SetPoint(x,y,0xFF); 
+           }
+        }        
+      }    
+    }    
+    
+//    x++;
+//    y++;
+//    hxzp_st7789_SetPoint(x,y,RED); 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 //   } 
@@ -186,7 +213,7 @@ void StartDefaultTask(void *argument)
 //    read_write_file();
     
     
-//    printf("??");
+    printf("??");
     
 //    HAL_UART_Transmit(&huart3,(uint8_t*)"abdasdk\r",strlen("abdasdk\r"),1000);
     
@@ -228,7 +255,7 @@ void StartDefaultTask(void *argument)
     
 //    if(HAL_SD_ReadBlocks_DMA(&hsd,dataR,1,1))while(1);
 //    osThreadExit();
-    osDelay(1000);
+    osDelay(2000);
   }
   /* USER CODE END StartDefaultTask */
 }

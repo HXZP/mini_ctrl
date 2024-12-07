@@ -1868,9 +1868,9 @@
               <FilePath>..\..\..\user\Application\Sys\board_config.h</FilePath>
             </File>
             <File>
-              <FileName>sys_time.c</FileName>
+              <FileName>system.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\user\Application\Sys\sys_time.c</FilePath>
+              <FilePath>..\..\..\user\Application\Sys\system.c</FilePath>
             </File>
           </Files>
         </Group>

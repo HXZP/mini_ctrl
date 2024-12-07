@@ -59,4 +59,7 @@ mini_control/drv_init.o: ..\..\..\user\Application\Drv\drv_init.c \
   ..\..\..\user\Application\Drv\drv_led.h \
   ..\..\..\user\Application\Drv\drv_lcd.h \
   ..\..\..\user\hxzp_device\hxzp_st7789.h ..\Core\Inc\spi.h \
-  ..\..\..\user\Application\Drv\drv_usart.h ..\Core\Inc\usart.h
+  ..\..\..\user\Application\Drv\drv_usart.h ..\Core\Inc\usart.h \
+  ..\USB_DEVICE\App\usb_device.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
+  ..\USB_DEVICE\Target\usbd_conf.h

@@ -65,6 +65,7 @@ mini_control/test.o: ..\..\..\user\Application\App\Test.c \
   ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
   ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
   ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h \
-  ..\..\..\user\Application\Sys\sys_time.h \
+  ..\..\..\user\Application\Sys\system.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h \
-  ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \
+  ..\..\..\user\hxzp_device\hxzp_st7789.h
