@@ -8,9 +8,23 @@
 
 #include "board_config.h"
 
+void sys_usb_printf(const char *format, ...);
+#define USB_PRINTF(format, ...)               sys_usb_printf(format, ##__VA_ARGS__);
+
+
 #ifndef SYSTEM_PRINTF_PORT
-  #define SYSTEM_PRINTF_PORT 
+  #define SYSTEM_PRINTF_PORT 0
 #endif
+
+
+#if (SYSTEM_PRINTF_PORT == USING_PRINTF_UART)
+#define LOG(format, ...)               printf(format, ##__VA_ARGS__);
+
+#elif (SYSTEM_PRINTF_PORT == USING_PRINTF_USB)
+#define LOG(format, ...)               USB_PRINTF(format, ##__VA_ARGS__);
+
+#endif
+
 
 
 #define SYSTEM_TIMER_FREQ_HZ HAL_RCC_GetSysClockFreq()

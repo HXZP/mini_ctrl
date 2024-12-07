@@ -47,7 +47,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include <string.h>
 #include "ff_gen_drv.h"
-
+#include "stdio.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -160,6 +160,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
   DRESULT res = RES_ERROR;
   uint32_t timeout = 100000;
 
+//  printf("sd write start\r\n");
   if(BSP_SD_WriteBlocks((uint32_t*)buff, 
                         (uint32_t)(sector), 
                         count, SD_DATATIMEOUT) == MSD_OK)
@@ -171,6 +172,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
         return RES_ERROR;
       }
     }    
+//    printf("sd write success\r\n");
     res = RES_OK;
   }
   

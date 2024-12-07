@@ -187,3 +187,47 @@ defaultTask    	B	24	251	4
 LedTask        	B	24	96	1
 Tmr Svc        	B	2	221	6
 
+## 四线调试问题
+
+尝试使用4线模式，但是一直无法成功，卡在初始化4线模式处
+
+四线模式初始化的过程为
+
+在一线模式下，发送命令开启四线模式，据说速度不能大于400Khz
+
+尝试过降低速度后无效果
+
+在设置四线模式的函数中SD_WideBus_Enable的SD_FindSCR获取不到回复
+
+```C
+  while(!__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT))
+  {
+    if(__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_RXDAVL))
+    {
+      *(tempscr + index) = SDIO_ReadFIFO(hsd->Instance);
+      index++;
+    }
+    else if(!__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_RXACT))
+    {
+      break;
+    }
+
+    if((HAL_GetTick() - tickstart) >=  SDMMC_DATATIMEOUT)
+    {
+      return HAL_SD_ERROR_TIMEOUT;
+    }
+  }
+```
+
+注释中描述是无法使用四线模式
+
+```C
+  /* If requested card supports wide bus operation */
+return HAL_SD_ERROR_REQUEST_NOT_APPLICABLE;
+```
+
+姑且认为是这个原因，暂时也没换其他sd试试，目前这个sd卡也比较便宜，使用1线是可以正常用的
+
+## 速度
+
+hsd.Init.ClockDiv = 6;好像只有某些值能用

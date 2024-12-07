@@ -4,7 +4,7 @@
 ringbuff usart3_rx_ringbuff;
 uint8_t usart3_rx_data[1024];
 uint8_t usart3_rx_buff[1024];
-uint16_t f;
+
 void Drv_Usart_Init(void)
 {
   ringbuff_init(&usart3_rx_ringbuff, usart3_rx_data, sizeof(uint8_t), sizeof(usart3_rx_data));

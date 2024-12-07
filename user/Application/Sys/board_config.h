@@ -24,13 +24,14 @@
 // <2=> USB
 // <3=> RTT
 // <4=> LCD
-#define SYSTEM_PRINTF_PORT 2
+#define SYSTEM_PRINTF_PORT 1
 
 
 // <q> 打印任务信息
-#define USING_PRINTF_TASK_INFO 1
+#define USING_PRINTF_TASK_INFO 0
 
 // <q> 打印错误追踪
+// <i> configUSE_IDLE_HOOK要置1
 #define USING_PRINTF_CMBACKTRACE 1
 
 //</h>

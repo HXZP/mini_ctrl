@@ -50,6 +50,7 @@
 "mini_control\drv_lcd.o"
 "mini_control\drv_led.o"
 "mini_control\drv_usart.o"
+"mini_control\drv_usb.o"
 "mini_control\hxzp_key.o"
 "mini_control\hxzp_led.o"
 "mini_control\hxzp_list.o"

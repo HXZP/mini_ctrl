@@ -56,10 +56,15 @@ mini_control/drv_init.o: ..\..\..\user\Application\Drv\drv_init.c \
   ..\..\..\user\Unit\cm_backtrace\cm_backtrace.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_def.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h \
+  ..\..\..\user\Application\Sys\system.h \
   ..\..\..\user\Application\Drv\drv_led.h \
   ..\..\..\user\Application\Drv\drv_lcd.h \
   ..\..\..\user\hxzp_device\hxzp_st7789.h ..\Core\Inc\spi.h \
   ..\..\..\user\Application\Drv\drv_usart.h ..\Core\Inc\usart.h \
-  ..\USB_DEVICE\App\usb_device.h \
+  ..\..\..\user\Application\Drv\drv_usb.h ..\USB_DEVICE\App\usb_device.h \
   ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h
+  ..\USB_DEVICE\Target\usbd_conf.h ..\USB_DEVICE\App\usbd_cdc_if.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h

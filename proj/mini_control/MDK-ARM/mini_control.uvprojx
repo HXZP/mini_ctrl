@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../FATFS/Target;../FATFS/App;../Middlewares/Third_Party/FatFs/src;../Middlewares/Third_Party/FatFs/src/drivers;../../../user/Application/App;../../../user/Application/Drv;../../../user/hxzp_device;../../../user/hxzp_Lib;../../../user/Unit;../../../user/extend/WouoUI;..\..\..\user\Unit\cm_backtrace;..\..\..\user\Application\Sys</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../FATFS/Target;../FATFS/App;../Middlewares/Third_Party/FatFs/src;../Middlewares/Third_Party/FatFs/src/drivers;../../../user/Application/App;../../../user/Application/Drv;../../../user/hxzp_device;../../../user/hxzp_Lib;../../../user/Unit;../../../user/extend/WouoUI;../../../user/Unit/cm_backtrace;../../../user/Application/Sys</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1921,6 +1921,11 @@
               <FileName>drv_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\user\Application\Drv\drv_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_usb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\user\Application\Drv\drv_usb.c</FilePath>
             </File>
           </Files>
         </Group>

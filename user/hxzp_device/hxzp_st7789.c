@@ -227,6 +227,16 @@ void hxzp_st7789_SetPoint(uint16_t x, uint16_t y, uint16_t color)
     
 }
 
+void hxzp_st7789_SetWord(uint16_t x, uint16_t y, uint16_t color)
+{
+    if(LCD.initFlag == 0)
+    {
+        return;
+    }
+
+}
+
+
 void hxzp_st7789_GetTcReg(getTcFlag getflag)
 {
     if(getflag == NULL)

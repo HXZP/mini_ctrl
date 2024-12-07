@@ -117,6 +117,7 @@ uint32_t res4 = 0;
 uint32_t x = 0;
 uint32_t y = 0;
 uint8_t word = 0;
+uint16_t corlo = 0;
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */    
@@ -128,7 +129,7 @@ void StartDefaultTask(void *argument)
 //  hxzp_Led_set("W2",2);
  
   
-  
+//  MX_USB_DEVICE_Init();
   
 //  TestUI_Init();
   
@@ -157,8 +158,7 @@ void StartDefaultTask(void *argument)
 //   read_write_file();//res1 = 1;
     
     
-    
-
+    corlo++;
     
     for(uint16_t wordNum = 0;wordNum < 4;wordNum++)
     {
@@ -172,7 +172,7 @@ void StartDefaultTask(void *argument)
           
            if(font16_16[wordNum][wordIdex] & (0x80 >> wordBit))
            {
-              hxzp_st7789_SetPoint(x,y,0xFF); 
+              hxzp_st7789_SetPoint(x,y,corlo); 
            }
         }        
       }    
@@ -213,7 +213,9 @@ void StartDefaultTask(void *argument)
 //    read_write_file();
     
     
-    printf("??");
+//    LOG("what");
+    LOG("what:%d",corlo);
+    
     
 //    HAL_UART_Transmit(&huart3,(uint8_t*)"abdasdk\r",strlen("abdasdk\r"),1000);
     
@@ -255,7 +257,7 @@ void StartDefaultTask(void *argument)
     
 //    if(HAL_SD_ReadBlocks_DMA(&hsd,dataR,1,1))while(1);
 //    osThreadExit();
-    osDelay(2000);
+    osDelay(1000);
   }
   /* USER CODE END StartDefaultTask */
 }

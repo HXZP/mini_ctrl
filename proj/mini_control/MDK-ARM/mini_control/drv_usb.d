@@ -1,5 +1,5 @@
-mini_control/drv_usart.o: ..\..\..\user\Application\Drv\drv_usart.c \
-  ..\..\..\user\Application\Drv\drv_usart.h \
+mini_control/drv_usb.o: ..\..\..\user\Application\Drv\drv_usb.c \
+  ..\..\..\user\Application\Drv\drv_usb.h \
   ..\..\..\user\hxzp_Lib\hxzp_lib.h ..\..\..\user\hxzp_Lib\hxzp_list.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
@@ -55,4 +55,10 @@ mini_control/drv_usart.o: ..\..\..\user\Application\Drv\drv_usart.c \
   ..\..\..\user\Unit\cm_backtrace\cm_backtrace.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_def.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h \
-  ..\..\..\user\Application\Sys\system.h ..\Core\Inc\usart.h
+  ..\..\..\user\Application\Sys\system.h ..\USB_DEVICE\App\usb_device.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
+  ..\USB_DEVICE\Target\usbd_conf.h ..\USB_DEVICE\App\usbd_cdc_if.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
+  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h

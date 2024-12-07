@@ -4,9 +4,12 @@
 
 #include "usbd_cdc_if.h"
 
+#include <stdarg.h>
 
 #include "FreeRTOS.h"
 #include "task.h"
+
+
 /*
   printf打印重定向
   串口
@@ -21,16 +24,24 @@ int fputc(int ch, FILE *f)//串口重定向
     HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,1000);
 #endif
   
-#if (SYSTEM_PRINTF_PORT == USING_PRINTF_USB)  
-    CDC_Transmit_FS((uint8_t*)&ch,1);
-#endif  
-  
-  
-  
+
     return ch;
 }
 
+#if (SYSTEM_PRINTF_PORT == USING_PRINTF_USB)  
 
+static uint8_t buff[1024];
+void sys_usb_printf(const char *format, ...)
+{
+  va_list args;
+  uint32_t length;
+
+  va_start(args, format);
+  length = vsnprintf((char *)buff, APP_TX_DATA_SIZE, (char *)format, args);
+  va_end(args);
+  CDC_Transmit_FS(buff, length);
+}
+#endif  
 
 
 /*

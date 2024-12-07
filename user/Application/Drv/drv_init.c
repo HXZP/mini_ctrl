@@ -10,7 +10,7 @@ void Drv_Init(void)
   
   Drv_Usart_Init();
   
-  MX_USB_DEVICE_Init();
+  Drv_Usb_Init();
   
 #if USING_PRINTF_CMBACKTRACE == 1  
   cm_backtrace_init(HW_NAME,HW_VERSION,SW_VERSION);

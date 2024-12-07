@@ -29,8 +29,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "board_config.h"
 #include "user_init.h"
 #include "drv_init.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

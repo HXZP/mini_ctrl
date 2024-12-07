@@ -46,6 +46,7 @@ mini_control/system.o: ..\..\..\user\Application\Sys\system.c \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
   ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
   ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdarg.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
   ..\Core\Inc\FreeRTOSConfig.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \

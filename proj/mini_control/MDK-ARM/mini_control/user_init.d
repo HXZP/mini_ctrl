@@ -56,4 +56,5 @@ mini_control/user_init.o: ..\..\..\user\Application\App\user_init.c \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
   ..\..\..\user\Unit\cm_backtrace\cm_backtrace.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_def.h \
-  ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h
+  ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h \
+  ..\..\..\user\Application\Sys\system.h
