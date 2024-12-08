@@ -208,7 +208,7 @@ void hxzp_st7789_SetTran(uint16_t xstart, uint16_t ystart, uint16_t xend, uint16
 
 void hxzp_st7789_SetPoint(uint16_t x, uint16_t y, uint16_t color)
 {
-    if(LCD.initFlag == 0)
+    if(LCD.initFlag != 2)
     {
         return;
     }
@@ -370,11 +370,15 @@ static void hxzp_st7789_Init(void)
     hxzp_st7789_Data(0x18);
     hxzp_st7789_Data(0x16);
     hxzp_st7789_Data(0x1c);
-
+    
     hxzp_st7789_Commad(0x21);// 打开反显
-    hxzp_st7789_Commad(0x29);//Display On
-    hxzp_st7789_DelayMs(150);
+    hxzp_st7789_Commad(0x28);//Display On
 
+    hxzp_st7789_SetBackground(0);
+    
+    hxzp_st7789_Commad(0x29);//Display On
+    hxzp_st7789_DelayMs(150);    
+    
     LCD.initFlag = 2;
 }
 
@@ -389,7 +393,7 @@ uint16_t xs,xe,ys,ye;
 void StartLcdTask(void *argument)
 {
     hxzp_st7789_Init();
-    hxzp_st7789_SetBackground(*(uint16_t*)(&color));
+    
     
     for(;;)
     {

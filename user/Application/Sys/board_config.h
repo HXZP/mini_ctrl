@@ -18,13 +18,13 @@
 //<h> 打印信息
 
 // <o>打印方式
-// <i>无
+// <i>USB串口打印可以由上位机设置波特率
 // <0=> 不打印
 // <1=> 串口
 // <2=> USB
 // <3=> RTT
 // <4=> LCD
-#define SYSTEM_PRINTF_PORT 1
+#define SYSTEM_PRINTF_PORT 2
 
 
 // <q> 打印任务信息

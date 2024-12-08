@@ -11,7 +11,7 @@ void Key_Event_CW(uint8_t state)
       break;
 
     case KEY_PRESS:
-      hxzp_Led_piece("W0","157AAAAAAAA9876543210",2,1,0,1);
+      hxzp_Led_piece("W0","157AAAAAAAA9876543210",2,1,0,0);
       break;
     
     case KEY_DOWN:
@@ -40,7 +40,7 @@ void Key_Event_CCW(uint8_t state)
       break;
 
     case KEY_PRESS:
-      hxzp_Led_piece("W2","157AAAAAAAA9876543210",2,1,0,1);
+      hxzp_Led_piece("W2","157AAAAAAAA9876543210",2,1,0,0);
       break;
     
     case KEY_DOWN:
@@ -69,9 +69,9 @@ void Key_Event_PUSH(uint8_t state)
       break;
 
     case KEY_PRESS:
-      hxzp_Led_piece("W0","00000000000123456789A987654321000000000000000",2,1,0,1);
-      hxzp_Led_piece("W1","123456789A98765432100000000000000000000000000",2,1,0,1);
-      hxzp_Led_piece("W2","00000000000123456789A987654321000000000000000",2,1,0,1);
+      hxzp_Led_piece("W0","00000000000123456789A987654321000000000000000",2,1,0,0);
+      hxzp_Led_piece("W1","123456789A98765432100000000000000000000000000",2,1,0,0);
+      hxzp_Led_piece("W2","00000000000123456789A987654321000000000000000",2,1,0,0);
       break;
     
     case KEY_DOWN:
@@ -100,9 +100,9 @@ void Key_Event_KEY1(uint8_t state)
       break;
 
     case KEY_PRESS:
-      hxzp_Led_piece("W0","0000000000000000000000123456789A9876543210000",2,1,0,1);
-      hxzp_Led_piece("W1","00000000000123456789A987654321000000000000000",2,1,0,1);
-      hxzp_Led_piece("W2","123456789A98765432100000000000000000000000000",2,1,0,1);
+      hxzp_Led_piece("W0","0000000000000000000000123456789A9876543210000",2,1,0,0);
+      hxzp_Led_piece("W1","00000000000123456789A987654321000000000000000",2,1,0,0);
+      hxzp_Led_piece("W2","123456789A98765432100000000000000000000000000",2,1,0,0);
       break;
     
     case KEY_DOWN:
@@ -131,9 +131,9 @@ void Key_Event_KEY2(uint8_t state)
       break;
 
     case KEY_PRESS:
-      hxzp_Led_piece("W0","123456789A98765432100000000000000000000000000",2,1,0,1);
-      hxzp_Led_piece("W1","00000000000123456789A987654321000000000000000",2,1,0,1);
-      hxzp_Led_piece("W2","0000000000000000000000123456789A9876543210000",2,1,0,1);    
+      hxzp_Led_piece("W0","123456789A98765432100000000000000000000000000",2,1,0,0);
+      hxzp_Led_piece("W1","00000000000123456789A987654321000000000000000",2,1,0,0);
+      hxzp_Led_piece("W2","0000000000000000000000123456789A9876543210000",2,1,0,0);    
       break;
     
     case KEY_DOWN:

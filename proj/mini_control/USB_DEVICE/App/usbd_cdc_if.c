@@ -23,6 +23,7 @@
 
 /* USER CODE BEGIN INCLUDE */
 #include "drv_usb.h"
+#include "hxzp_lib.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -228,7 +229,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
       USBD_CDC_LineCoding.format = pbuf[4];
       USBD_CDC_LineCoding.paritytype = pbuf[5];
       USBD_CDC_LineCoding.datatype = pbuf[6];
-
+      hxzp_Led_piece("W2","157AAAAAAAA9876543210",2,1,0,0);
     break;
 
     case CDC_GET_LINE_CODING:
@@ -280,6 +281,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
   
   Drv_Usb_RxCpltCallback(Buf, *Len);
   
+  hxzp_Led_piece("W1","30",1,1,0,0);
   return (USBD_OK);
   /* USER CODE END 6 */
 }
@@ -305,6 +307,8 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len)
   }
   USBD_CDC_SetTxBuffer(&hUsbDeviceFS, Buf, Len);
   result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
+  
+  hxzp_Led_piece("W0","30",1,1,0,1);
   /* USER CODE END 7 */
   return result;
 }
