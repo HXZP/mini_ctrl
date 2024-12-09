@@ -24,7 +24,7 @@
 #include "sdio.h"
 #include "spi.h"
 #include "usart.h"
-#include "usb_device.h"
+#include "usb.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -102,6 +102,7 @@ int main(void)
   MX_FATFS_Init();
   MX_USART3_UART_Init();
   MX_USART2_UART_Init();
+  MX_USB_PCD_Init();
   /* USER CODE BEGIN 2 */
   Drv_Init();
   User_Init();

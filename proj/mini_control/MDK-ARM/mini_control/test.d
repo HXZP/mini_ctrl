@@ -56,15 +56,15 @@ mini_control/test.o: ..\..\..\user\Application\App\Test.c \
   ..\Middlewares\Third_Party\FatFs\src\ff_gen_drv.h \
   ..\Middlewares\Third_Party\FatFs\src\diskio.h \
   ..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio.h \
-  ..\Core\Inc\sdio.h ..\USB_DEVICE\App\usb_device.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h \
+  ..\Core\Inc\sdio.h ..\..\..\user\Application\App_USB\App\usb_device.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_def.h \
+  ..\..\..\user\Application\App_USB\Target\usbd_conf.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
-  ..\USB_DEVICE\App\usbd_cdc_if.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h \
+  ..\..\..\user\Application\App_USB\App\usbd_cdc_if.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h \
   ..\..\..\user\Application\Sys\system.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \

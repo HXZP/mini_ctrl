@@ -61,10 +61,12 @@ mini_control/drv_init.o: ..\..\..\user\Application\Drv\drv_init.c \
   ..\..\..\user\Application\Drv\drv_lcd.h \
   ..\..\..\user\hxzp_device\hxzp_st7789.h ..\Core\Inc\spi.h \
   ..\..\..\user\Application\Drv\drv_usart.h ..\Core\Inc\usart.h \
-  ..\..\..\user\Application\Drv\drv_usb.h ..\USB_DEVICE\App\usb_device.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h ..\USB_DEVICE\App\usbd_cdc_if.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h
+  ..\..\..\user\Application\Drv\drv_usb.h \
+  ..\..\..\user\Application\App_USB\App\usb_device.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_def.h \
+  ..\..\..\user\Application\App_USB\Target\usbd_conf.h \
+  ..\..\..\user\Application\App_USB\App\usbd_cdc_if.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h

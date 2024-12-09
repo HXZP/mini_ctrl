@@ -55,10 +55,12 @@ mini_control/drv_usb.o: ..\..\..\user\Application\Drv\drv_usb.c \
   ..\..\..\user\Unit\cm_backtrace\cm_backtrace.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_def.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h \
-  ..\..\..\user\Application\Sys\system.h ..\USB_DEVICE\App\usb_device.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h ..\USB_DEVICE\App\usbd_cdc_if.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h
+  ..\..\..\user\Application\Sys\system.h \
+  ..\..\..\user\Application\App_USB\App\usb_device.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_def.h \
+  ..\..\..\user\Application\App_USB\Target\usbd_conf.h \
+  ..\..\..\user\Application\App_USB\App\usbd_cdc_if.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h

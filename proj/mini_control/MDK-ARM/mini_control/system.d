@@ -38,14 +38,14 @@ mini_control/system.o: ..\..\..\user\Application\Sys\system.c \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_usb.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd_ex.h \
   ..\..\..\user\Application\Sys\board_config.h ..\Core\Inc\usart.h \
-  ..\Core\Inc\main.h ..\USB_DEVICE\App\usbd_cdc_if.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h \
+  ..\Core\Inc\main.h ..\..\..\user\Application\App_USB\App\usbd_cdc_if.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_def.h \
+  ..\..\..\user\Application\App_USB\Target\usbd_conf.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdarg.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
   ..\Core\Inc\FreeRTOSConfig.h \

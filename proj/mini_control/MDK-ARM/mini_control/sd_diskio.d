@@ -50,5 +50,4 @@ mini_control/sd_diskio.o: \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM3\portmacro.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
-  ..\FATFS\Target\bsp_driver_sd.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h
+  ..\FATFS\Target\bsp_driver_sd.h

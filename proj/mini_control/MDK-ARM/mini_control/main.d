@@ -52,18 +52,17 @@ mini_control/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Middlewares\Third_Party\FatFs\src\diskio.h \
   ..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio.h \
   ..\Core\Inc\sdio.h ..\Core\Inc\spi.h ..\Core\Inc\usart.h \
-  ..\USB_DEVICE\App\usb_device.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h ..\Core\Inc\gpio.h \
+  ..\Core\Inc\usb.h ..\Core\Inc\gpio.h \
   ..\..\..\user\Application\App\user_init.h \
   ..\..\..\user\Application\App\user_key.h \
   ..\..\..\user\Application\Drv\drv_key.h \
   ..\..\..\user\hxzp_Lib\hxzp_lib.h ..\..\..\user\hxzp_Lib\hxzp_list.h \
-  ..\..\..\user\hxzp_Lib\hxzp_led.h ..\..\..\user\hxzp_Lib\hxzp_key.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
+  ..\..\..\user\hxzp_Lib\hxzp_led.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  ..\..\..\user\hxzp_Lib\hxzp_key.h \
   ..\..\..\user\hxzp_Lib\hxzp_ringbuff.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
   ..\..\..\user\Unit\cm_backtrace\cm_backtrace.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_def.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h \
@@ -74,8 +73,11 @@ mini_control/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\..\..\user\hxzp_device\hxzp_st7789.h \
   ..\..\..\user\Application\Drv\drv_usart.h \
   ..\..\..\user\Application\Drv\drv_usb.h \
-  ..\USB_DEVICE\App\usbd_cdc_if.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h
+  ..\..\..\user\Application\App_USB\App\usb_device.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_def.h \
+  ..\..\..\user\Application\App_USB\Target\usbd_conf.h \
+  ..\..\..\user\Application\App_USB\App\usbd_cdc_if.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h

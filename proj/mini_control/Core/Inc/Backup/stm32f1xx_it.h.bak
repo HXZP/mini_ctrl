@@ -58,6 +58,8 @@ void DMA1_Channel7_IRQHandler(void);
 void USB_LP_CAN1_RX0_IRQHandler(void);
 void USART3_IRQHandler(void);
 void TIM8_UP_IRQHandler(void);
+void SDIO_IRQHandler(void);
+void DMA2_Channel4_5_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

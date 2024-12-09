@@ -1,9 +1,10 @@
-mini_control/usbd_cdc_if.o: ..\USB_DEVICE\App\usbd_cdc_if.c \
-  ..\USB_DEVICE\App\usbd_cdc_if.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h \
+mini_control/usbd_cdc_if.o: \
+  ..\..\..\user\Application\App_USB\App\usbd_cdc_if.c \
+  ..\..\..\user\Application\App_USB\App\usbd_cdc_if.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_def.h \
+  ..\..\..\user\Application\App_USB\Target\usbd_conf.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h ..\Core\Inc\main.h \
@@ -42,8 +43,8 @@ mini_control/usbd_cdc_if.o: ..\USB_DEVICE\App\usbd_cdc_if.c \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_usb.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd_ex.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h \
   ..\..\..\user\Application\Drv\drv_usb.h \
   ..\..\..\user\hxzp_Lib\hxzp_lib.h ..\..\..\user\hxzp_Lib\hxzp_list.h \
   ..\..\..\user\hxzp_Lib\hxzp_led.h \
@@ -62,4 +63,5 @@ mini_control/usbd_cdc_if.o: ..\USB_DEVICE\App\usbd_cdc_if.c \
   ..\..\..\user\Unit\cm_backtrace\cm_backtrace.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_def.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h \
-  ..\..\..\user\Application\Sys\system.h ..\USB_DEVICE\App\usb_device.h
+  ..\..\..\user\Application\Sys\system.h \
+  ..\..\..\user\Application\App_USB\App\usb_device.h
