@@ -26,8 +26,10 @@
 #include "usbd_cdc.h"
 #include "usbd_cdc_if.h"
 
+#include "usbd_msc.h"
+#include "usbd_storage_if.h"
 /* USER CODE BEGIN Includes */
-
+#include "drv_usb.h"
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN PV */
@@ -72,14 +74,32 @@ void MX_USB_DEVICE_Init(void)
   {
     Error_Handler();
   }
-  if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
+  
+  switch(Drv_Get_UsbMode())
   {
-    Error_Handler();
+    case DRV_USB_CDC:
+      if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
+      {
+        Error_Handler();
+      }
+      if (USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS) != USBD_OK)
+      {
+        Error_Handler();
+      }      
+    break;
+  
+    case DRV_USB_MSC:
+      if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_MSC) != USBD_OK)
+      {
+        Error_Handler();
+      }
+      if (USBD_MSC_RegisterStorage(&hUsbDeviceFS, &USBD_Storage_Interface_fops_FS) != USBD_OK)
+      {
+        Error_Handler();
+      }      
+    break;  
   }
-  if (USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS) != USBD_OK)
-  {
-    Error_Handler();
-  }
+  
   if (USBD_Start(&hUsbDeviceFS) != USBD_OK)
   {
     Error_Handler();

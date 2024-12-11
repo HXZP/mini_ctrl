@@ -80,4 +80,8 @@ mini_control/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
-  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h \
+  ..\..\..\user\Application\Drv\drv_bmi270.h \
+  ..\..\..\user\hxzp_device\bmi270\bmi2.h \
+  ..\..\..\user\hxzp_device\bmi270\bmi2_defs.h \
+  ..\..\..\user\hxzp_device\bmi270\bmi270.h

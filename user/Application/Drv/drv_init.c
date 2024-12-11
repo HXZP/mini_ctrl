@@ -16,5 +16,6 @@ void Drv_Init(void)
   cm_backtrace_init(HW_NAME,HW_VERSION,SW_VERSION);
 #endif
   
+//  Drv_Bmi270_Init();
 }
 

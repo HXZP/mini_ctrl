@@ -74,6 +74,7 @@
 /*---------- -----------*/
 #define MAX_STATIC_ALLOC_SIZE     512
 
+#define MSC_MEDIA_PACKET     512
 /****************************************/
 /* #define for FS and HS identification */
 #define DEVICE_FS 		0

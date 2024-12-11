@@ -24,9 +24,11 @@
 #include "usbd_def.h"
 #include "usbd_core.h"
 #include "usbd_cdc.h"
+#include "usbd_msc.h"
 
 /* USER CODE BEGIN Includes */
 #include "usb.h"
+#include "drv_usb.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,46 +66,7 @@ void HAL_PCDEx_SetConnectionState(PCD_HandleTypeDef *hpcd, uint8_t state);
 /*******************************************************************************
                        LL Driver Callbacks (PCD -> USB Device Library)
 *******************************************************************************/
-/* MSP Init */
-#if 0
-void HAL_PCD_MspInit(PCD_HandleTypeDef* pcdHandle)
-{
-  if(pcdHandle->Instance==USB)
-  {
-  /* USER CODE BEGIN USB_MspInit 0 */
 
-  /* USER CODE END USB_MspInit 0 */
-    /* Peripheral clock enable */
-    __HAL_RCC_USB_CLK_ENABLE();
-
-    /* Peripheral interrupt init */
-    HAL_NVIC_SetPriority(USB_LP_CAN1_RX0_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(USB_LP_CAN1_RX0_IRQn);
-  /* USER CODE BEGIN USB_MspInit 1 */
-
-  /* USER CODE END USB_MspInit 1 */
-  }
-}
-
-void HAL_PCD_MspDeInit(PCD_HandleTypeDef* pcdHandle)
-{
-  if(pcdHandle->Instance==USB)
-  {
-  /* USER CODE BEGIN USB_MspDeInit 0 */
-
-  /* USER CODE END USB_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_USB_CLK_DISABLE();
-
-    /* Peripheral interrupt Deinit*/
-    HAL_NVIC_DisableIRQ(USB_LP_CAN1_RX0_IRQn);
-
-  /* USER CODE BEGIN USB_MspDeInit 1 */
-
-  /* USER CODE END USB_MspDeInit 1 */
-  }
-}
-#endif
 /**
   * @brief  Setup stage callback
   * @param  hpcd: PCD handle
@@ -332,11 +295,23 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x00 , PCD_SNG_BUF, 0x18);
   HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x80 , PCD_SNG_BUF, 0x58);
   /* USER CODE END EndPoint_Configuration */
-  /* USER CODE BEGIN EndPoint_Configuration_CDC */
-  HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x81 , PCD_SNG_BUF, 0xC0);
-  HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x01 , PCD_SNG_BUF, 0x110);
-  HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x82 , PCD_SNG_BUF, 0x100);
-  /* USER CODE END EndPoint_Configuration_CDC */
+  
+  if(Drv_Get_UsbMode() == DRV_USB_CDC)
+  {
+    /* USER CODE BEGIN EndPoint_Configuration_CDC */
+    HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x81 , PCD_SNG_BUF, 0xC0);
+    HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x01 , PCD_SNG_BUF, 0x110);
+    HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x82 , PCD_SNG_BUF, 0x100);
+    /* USER CODE END EndPoint_Configuration_CDC */  
+  }
+  else if(Drv_Get_UsbMode() == DRV_USB_MSC)
+  {
+    /* USER CODE BEGIN EndPoint_Configuration_MSC */
+    HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x81 , PCD_SNG_BUF, 0x98);
+    HAL_PCDEx_PMAConfig((PCD_HandleTypeDef*)pdev->pData , 0x01 , PCD_SNG_BUF, 0xD8);
+    /* USER CODE END EndPoint_Configuration_MSC */  
+  }
+  
   return USBD_OK;
 }
 
@@ -589,7 +564,20 @@ void USBD_LL_Delay(uint32_t Delay)
   */
 void *USBD_static_malloc(uint32_t size)
 {
-  static uint32_t mem[(sizeof(USBD_CDC_HandleTypeDef)/4)+1];/* On 32-bit boundary */
+//  static uint32_t mem[(sizeof(USBD_CDC_HandleTypeDef)/4)+1];/* On 32-bit boundary */
+//  static uint32_t mem[(sizeof(USBD_MSC_BOT_HandleTypeDef)/4)+1];/* On 32-bit boundary */
+  
+  void *mem;
+  
+  if(Drv_Get_UsbMode() == DRV_USB_CDC)
+  {
+    mem = malloc((sizeof(USBD_CDC_HandleTypeDef)/4)+1);
+  }
+  else if(Drv_Get_UsbMode() == DRV_USB_MSC)
+  {
+    mem = malloc((sizeof(USBD_MSC_BOT_HandleTypeDef)/4)+1);
+  }  
+  
   return mem;
 }
 

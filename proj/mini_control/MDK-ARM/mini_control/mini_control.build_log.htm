@@ -22,46 +22,26 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 D:\Aproject\foc\mini_ctrl\proj\mini_control\MDK-ARM\mini_control.uvprojx
-Project File Date:  12/10/2024
+Project File Date:  12/11/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'mini_control'
-compiling usbd_conf.c...
-compiling diskio.c...
-compiling bsp_driver_sd.c...
 compiling fatfs.c...
-compiling ff_gen_drv.c...
+compiling Test.c...
+compiling bsp_driver_sd.c...
+compiling diskio.c...
 compiling cm_backtrace.c...
+compiling ff_gen_drv.c...
 compiling ff.c...
 compiling syscall.c...
 compiling sd_diskio.c...
 assembling cmb_fault.S...
 compiling cc936.c...
 linking...
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_Init (referred from usb_device.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_RegisterClass (referred from usb_device.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_Start (referred from usb_device.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_GetString (referred from usbd_desc.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_SetupStage (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_DataOutStage (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_DataInStage (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_SOF (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_SetSpeed (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_Reset (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_Suspend (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_Resume (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_IsoOUTIncomplete (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_IsoINIncomplete (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_DevConnected (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_LL_DevDisconnected (referred from usbd_conf.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_CtlSendData (referred from usbd_cdc.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_CtlPrepareRx (referred from usbd_cdc.o).
-mini_control\mini_control.axf: Error: L6218E: Undefined symbol USBD_CtlError (referred from usbd_cdc.o).
-Not enough information to list image symbols.
-Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning and 19 error messages.
-"mini_control\mini_control.axf" - 19 Error(s), 0 Warning(s).
+Program Size: Code=92900 RO-data=178288 RW-data=4756 ZI-data=34044  
+FromELF: creating hex file...
+"mini_control\mini_control.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -96,10 +76,9 @@ Package Vendor: Keil
 
    * Component: Keil.ARM Compiler::Compiler:Event Recorder:DAP:1.5.1
       Include file:  Include/EventRecorder.h
-      Source file:   Source/EventRecorder.c
       Include file:  Config/EventRecorderConf.h
-Target not created.
-Build Time Elapsed:  00:00:04
+      Source file:   Source/EventRecorder.c
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

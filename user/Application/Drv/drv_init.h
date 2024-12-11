@@ -7,7 +7,7 @@
 
 #include "drv_usart.h"
 #include "drv_usb.h"
-
+#include "drv_bmi270.h"
 
 
 void Drv_Init(void);

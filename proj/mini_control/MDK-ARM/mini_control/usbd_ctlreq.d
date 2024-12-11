@@ -1,8 +1,8 @@
 mini_control/usbd_ctlreq.o: \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_def.h \
-  ..\USB_DEVICE\Target\usbd_conf.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_def.h \
+  ..\..\..\user\Application\App_USB\Target\usbd_conf.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h ..\Core\Inc\main.h \
@@ -41,5 +41,5 @@ mini_control/usbd_ctlreq.o: \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_usb.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd_ex.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h \
-  ..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc\usbd_core.h
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h

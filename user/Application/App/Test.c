@@ -135,7 +135,7 @@ void StartDefaultTask(void *argument)
   
 //  if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) {}
 
-//  res = f_mount(&SDFatFS, SDPath, 1);
+  res = f_mount(&SDFatFS, SDPath, 1);
   
 //  if(res)
 //  {
@@ -155,28 +155,28 @@ void StartDefaultTask(void *argument)
 //   
     
     
-//   read_write_file();//res1 = 1;
+   read_write_file();//res1 = 1;
     
     
     corlo++;
     
-    for(uint16_t wordNum = 0;wordNum < 4;wordNum++)
-    {
-      for(uint16_t wordIdex = 0;wordIdex < 32;wordIdex++)
-      {
-        word = font16_16[wordNum][wordIdex];
-        for(uint16_t wordBit = 0;wordBit < 8;wordBit++)
-        {
-           x = wordNum * 16 + (wordIdex % 2) * 8 + wordBit; 
-           y = wordIdex / 2;
-          
-           if(font16_16[wordNum][wordIdex] & (0x80 >> wordBit))
-           {
-              hxzp_st7789_SetPoint(x,y,corlo); 
-           }
-        }        
-      }    
-    }    
+//    for(uint16_t wordNum = 0;wordNum < 4;wordNum++)
+//    {
+//      for(uint16_t wordIdex = 0;wordIdex < 32;wordIdex++)
+//      {
+//        word = font16_16[wordNum][wordIdex];
+//        for(uint16_t wordBit = 0;wordBit < 8;wordBit++)
+//        {
+//           x = wordNum * 16 + (wordIdex % 2) * 8 + wordBit; 
+//           y = wordIdex / 2;
+//          
+//           if(font16_16[wordNum][wordIdex] & (0x80 >> wordBit))
+//           {
+//              hxzp_st7789_SetPoint(x,y,corlo); 
+//           }
+//        }        
+//      }    
+//    }    
     
 //    x++;
 //    y++;
@@ -258,7 +258,7 @@ void StartDefaultTask(void *argument)
     
 //    if(HAL_SD_ReadBlocks_DMA(&hsd,dataR,1,1))while(1);
 //    osThreadExit();
-    osDelay(10);
+    osDelay(100);
   }
   /* USER CODE END StartDefaultTask */
 }
