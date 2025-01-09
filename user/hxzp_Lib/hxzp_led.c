@@ -178,6 +178,11 @@ void hxzp_Led_Deinit(void)
 void hxzp_Led_set(const char *name,uint8_t num)
 {
   Led *self;
+
+  if(LedList == NULL)
+  {
+    return;
+  }
   
   for(List *node = LedList->next; node != NULL; node = node->next)
   {
@@ -202,6 +207,11 @@ void hxzp_Led_set(const char *name,uint8_t num)
 void hxzp_Led_insert(const char *name,uint8_t num)
 {
   Led *self;
+  
+  if(LedList == NULL)
+  {
+    return;
+  }
   
   for(List *node = LedList->next; node != NULL; node = node->next)
   {
@@ -238,6 +248,11 @@ void hxzp_Led_piece(const char *name,const char *light,uint8_t sacnTime,uint8_t 
   {
       return; 
   }  
+
+  if(LedList == NULL)
+  {
+    return;
+  }
   
   len = strlen(light);
   for(List *node = LedList->next; node != NULL; node = node->next)

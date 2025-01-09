@@ -24,7 +24,7 @@
 // <2=> USB
 // <3=> RTT
 // <4=> LCD
-#define SYSTEM_PRINTF_PORT 1
+#define SYSTEM_PRINTF_PORT 4
 
 
 // <q> 打印任务信息

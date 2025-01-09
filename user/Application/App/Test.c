@@ -10,6 +10,7 @@
 
 #include "spi.h"
 #include "usart.h"
+
 #include "fatfs.h"
 #include "sdio.h"
 
@@ -79,6 +80,89 @@ void read_write_file(void) {
 
 
 
+void read_word_file(uint8_t *data, uint16_t idex)
+{
+  FRESULT res;
+  UINT br;
+  // 打开文件以读取
+  res = f_open(&SDFile, "ch16x16.FON", FA_READ);
+  if (res == FR_OK) {
+      // 读取数据
+      res = f_lseek(&SDFile,idex*32);
+      res = f_read(&SDFile, data, 32, &br);
+      res = f_close(&SDFile);
+  }
+}
+
+void print_word2Lcd(const uint8_t *data, uint16_t xnum, uint16_t ynum,uint16_t color)
+{
+  uint8_t word = 0;
+  uint32_t x = 0;
+  uint32_t y = 0;
+
+  for(uint16_t wordIdex = 0;wordIdex < 32;wordIdex++)
+  {
+    word = data[wordIdex];
+    for(uint16_t wordBit = 0;wordBit < 8;wordBit++)
+    {
+       x = xnum * 16 + (wordIdex % 2) * 8 + wordBit; 
+       y = ynum * 16 + wordIdex / 2;
+      
+       if(data[wordIdex] & (0x80 >> wordBit))
+       {
+          hxzp_st7789_SetPoint(x,y,color); 
+       }
+       else
+      {
+          hxzp_st7789_SetPoint(x,y,0); 
+      }
+    }        
+  }    
+}
+
+void read_word_fileEn(uint8_t *data, uint16_t idex)
+{
+  FRESULT res;
+  UINT br;
+  // 打开文件以读取
+  res = f_open(&SDFile, "en16x16.FON", FA_READ);
+  if (res == FR_OK) {
+      // 读取数据
+      res = f_lseek(&SDFile,idex*16);
+      res = f_read(&SDFile, data, 16, &br);
+      res = f_close(&SDFile);
+  }
+}
+
+void print_word2LcdEn(const uint8_t *data, uint16_t xnum, uint16_t ynum,uint16_t color)
+{
+  uint8_t word = 0;
+  uint32_t x = 0;
+  uint32_t y = 0;
+
+  for(uint16_t wordIdex = 0;wordIdex < 16;wordIdex++)
+  {
+    word = data[wordIdex];
+    for(uint16_t wordBit = 0;wordBit < 8;wordBit++)
+    {
+       x = xnum * 8 + wordBit; 
+       y = ynum * 16 + wordIdex;
+      
+       if(data[wordIdex] & (0x80 >> wordBit))
+       {
+          hxzp_st7789_SetPoint(x,y,color); 
+       }
+       else
+      {
+          hxzp_st7789_SetPoint(x,y,0); 
+      }
+    }        
+  }    
+}
+
+
+
+
 //#define ITM_Port8(n)    (*((volatile unsigned char *)(0xE0000000+4*n)))
 //#define ITM_Port16(n)   (*((volatile unsigned short*)(0xE0000000+4*n)))
 //#define ITM_Port32(n)   (*((volatile unsigned long *)(0xE0000000+4*n)))
@@ -118,6 +202,9 @@ uint32_t x = 0;
 uint32_t y = 0;
 uint8_t word = 0;
 uint16_t corlo = 0;
+
+uint8_t worddata[32];
+
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */    
@@ -134,6 +221,7 @@ void StartDefaultTask(void *argument)
 //  TestUI_Init();
   
 //  if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) {}
+
 
   res = f_mount(&SDFatFS, SDPath, 1);
   
@@ -154,11 +242,24 @@ void StartDefaultTask(void *argument)
 //   if(!res1){
 //   
     
+//    sys_lcd_printf(77);
     
-   read_write_file();//res1 = 1;
+//   read_write_file();//res1 = 1;
     
+//    read_word_file(worddata,corlo);
+//  
+//    print_word2Lcd(worddata,0,0,0xFFF);
+   
+//    read_word_fileEn(worddata,corlo);
+//  
+//    print_word2LcdEn(worddata,0,0,0xFFF);
+
+//    hxzp_Lcd_Print(font16_16[4]);
     
-    corlo++;
+//    for(uint16_t wordNum = 0;wordNum < 4;wordNum++)
+//    {    
+//      print_word2Lcd(font16_16[wordNum],wordNum,0,corlo);
+//    }  
     
 //    for(uint16_t wordNum = 0;wordNum < 4;wordNum++)
 //    {
@@ -185,9 +286,9 @@ void StartDefaultTask(void *argument)
     
     
     
+    corlo++;
     
-    
-    
+    if(corlo > 100)corlo = 0;
     
     
     
@@ -213,9 +314,11 @@ void StartDefaultTask(void *argument)
 //    read_write_file();
     
     
-//    LOG("what");
+//    LOG("%d\r\n",corlo);
 
-    LOG("what color:%d",corlo);
+//    sys_lcd_printf(77);
+    
+//    printf("yes,you are right,please!what color:%d`",corlo);
     
     
 //    HAL_UART_Transmit(&huart3,(uint8_t*)"abdasdk\r",strlen("abdasdk\r"),1000);
@@ -249,7 +352,7 @@ void StartDefaultTask(void *argument)
 
 //    for(uint8_t i = 0;i<20;i++)
 //    {
-//      dataR[i] = 0;
+//      hxzp_Lcd_Print(font16_16[4]);
 //    }
 //    
 //    while(HAL_SD_GetCardState(&hsd) != HAL_SD_CARD_TRANSFER);

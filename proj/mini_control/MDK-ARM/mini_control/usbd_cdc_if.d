@@ -64,4 +64,7 @@ mini_control/usbd_cdc_if.o: \
   ..\..\..\user\Unit\cm_backtrace\cmb_def.h \
   ..\..\..\user\Unit\cm_backtrace\cmb_cfg.h \
   ..\..\..\user\Application\Sys\system.h \
-  ..\..\..\user\Application\App_USB\App\usb_device.h
+  ..\..\..\user\Application\App_USB\App\usb_device.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h

@@ -10,6 +10,50 @@
 #include "task.h"
 
 
+#include "fatfs.h"
+#include "sdio.h"
+#include "hxzp_st7789.h"
+
+
+#if 1//(SYSTEM_PRINTF_PORT == USING_PRINTF_LCD)  
+static uint8_t sysLcdData;
+static uint8_t sysLcdDataBuff[32] = {0};
+static void sys_read_word_fileEn(uint8_t *data, uint16_t idex)
+{
+  FRESULT res;
+  UINT br;
+  // 打开文件以读取
+  res = f_open(&SDFile, "en16x16.FON", FA_READ);
+  if (res == FR_OK) {
+      // 读取数据
+      res = f_lseek(&SDFile,idex*16);
+      res = f_read(&SDFile, data, 16, &br);
+      res = f_close(&SDFile);
+  }
+}
+void sys_lcd_printf(uint8_t ch)
+{
+  sys_read_word_fileEn(sysLcdDataBuff,(uint16_t)ch);
+
+  if(ch == 96)
+  {
+    hxzp_Lcd_PrintLF();
+    hxzp_Lcd_PrintCR();
+  }
+  else
+  {
+    hxzp_Lcd_Print(sysLcdDataBuff);
+  }
+  
+  
+
+//  hxzp_st7789_SetWord(sysLcdData,8,16,0,0,0xffff,0x0000);
+}    
+#endif
+
+
+
+
 /*
   printf打印重定向
   串口
@@ -23,8 +67,10 @@ int fputc(int ch, FILE *f)//串口重定向
 #if (SYSTEM_PRINTF_PORT == USING_PRINTF_UART)  
     HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,1000);
 #endif
-  
-
+    
+#if (SYSTEM_PRINTF_PORT == USING_PRINTF_LCD)  
+    sys_lcd_printf((uint8_t)ch);
+#endif
     return ch;
 }
 
@@ -128,7 +174,7 @@ uint32_t sys_getSys_s(void)
   return sys_getSys_ms()/1000;
 }
 
-
+#if 0
 /*
   1.执行低优先级，或后台需要不停处理的功能代码
   2.测试系统处理裕量（内核执行空闲任务时间越长表示内核越空闲）
@@ -157,3 +203,6 @@ void vApplicationIdleHook(void)
   }
 }
 #endif
+
+#endif
+

@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "system.h"
 
 /* USER CODE END Includes */
 
@@ -68,18 +69,29 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 void vApplicationIdleHook(void);
 
 /* USER CODE BEGIN 2 */
-void vApplicationIdleHook( void )
+#if (USING_PRINTF_TASK_INFO == 1)
+
+#define IDLEHOOK_TIME_MS 100
+void vApplicationIdleHook(void)
 {
-   /* vApplicationIdleHook() will only be called if configUSE_IDLE_HOOK is set
-   to 1 in FreeRTOSConfig.h. It will be called on each iteration of the idle
-   task. It is essential that code added to this hook function never attempts
-   to block in any way (for example, call xQueueReceive() with a block time
-   specified, or call vTaskDelay()). If the application makes use of the
-   vTaskDelete() API function (as this demo application does) then it is also
-   important that vApplicationIdleHook() is permitted to return to its calling
-   function, because it is the responsibility of the idle task to clean up
-   memory allocated by the kernel to any task that has since been deleted. */
+  static uint32_t getMs = 0;
+  
+  if(sys_getSys_ms() - getMs > IDLEHOOK_TIME_MS)
+  {
+  
+    char *buffer = (char*)malloc(256);
+    vTaskList(buffer);
+    
+    printf("///////////////////////\r\n");
+    printf("%s",buffer);
+    
+    
+    free(buffer);
+    
+    getMs = sys_getSys_ms();
+  }
 }
+#endif
 /* USER CODE END 2 */
 
 /**

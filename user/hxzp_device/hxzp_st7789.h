@@ -149,6 +149,33 @@ typedef struct hxzp_st7789_rgb_t
     uint16_t B:5;//31
 } hxzp_st7789_rgb;
 
+
+/*
+static uint8_t cursorx = 0;
+static uint8_t cursory = 0;
+static uint8_t wide = 8;
+static uint8_t high = 16;
+static uint16_t color = 0xFFFF;
+static uint16_t colorb = 0x0000;
+*/
+typedef struct  hxzp_string_t
+{
+  uint8_t cursorx;
+  uint8_t cursory;
+  
+  uint8_t wide;
+  uint8_t high;
+
+  uint16_t color;
+  uint16_t colorb;
+
+  uint16_t buffIndex;
+  
+}hxzp_string;
+
+
+
+
 typedef struct hxzp_st7789_t
 {
     uint8_t buff[LCD_DATA_BUFF_LEN];
@@ -160,6 +187,8 @@ typedef struct hxzp_st7789_t
         uint8_t reserve        : 5;
         /* data */
     };
+    
+    hxzp_string string;
     
     void (*setCS)(uint8_t state);
     void (*setA0)(uint8_t state);
@@ -189,6 +218,12 @@ void hxzp_st7789_SetBackground(uint16_t color);
 void hxzp_st7789_SetWindow(uint16_t xstart, uint16_t ystart, uint16_t xend, uint16_t yend);
 
 void hxzp_st7789_SetPoint(uint16_t x, uint16_t y, uint16_t color);
+
+void hxzp_st7789_SetWord(const uint8_t *data, uint8_t wid, uint8_t len, uint16_t xoffset, uint16_t yoffset, uint16_t color, uint16_t colorb);
+
+void hxzp_Lcd_PrintLF(void);//10
+void hxzp_Lcd_PrintCR(void);//13
+void hxzp_Lcd_Print(const uint8_t *data);
 #endif // HXZP_ST7789_H
 
 

@@ -48,4 +48,5 @@ mini_control/hxzp_st7789.o: ..\..\..\user\hxzp_device\hxzp_st7789.c \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd_ex.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\time.h \
   ..\..\..\user\Application\Sys\system.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h

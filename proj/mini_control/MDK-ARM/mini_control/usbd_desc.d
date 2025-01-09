@@ -65,4 +65,7 @@ mini_control/usbd_desc.o: \
   ..\..\..\user\Application\Sys\system.h \
   ..\..\..\user\Application\App_USB\App\usb_device.h \
   ..\..\..\user\Application\App_USB\App\usbd_cdc_if.h \
-  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h

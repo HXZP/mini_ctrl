@@ -70,6 +70,9 @@ mini_control/drv_init.o: ..\..\..\user\Application\Drv\drv_init.c \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h \
   ..\..\..\user\Application\Drv\drv_bmi270.h \
   ..\..\..\user\hxzp_device\bmi270\bmi2.h \
   ..\..\..\user\hxzp_device\bmi270\bmi2_defs.h \

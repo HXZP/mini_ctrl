@@ -10,7 +10,11 @@ void Drv_Usb_Init(void)
     
   MX_USB_DEVICE_Init();
   
+  if(u8usbMode == DRV_USB_CDC)
   USBD_CDC.Init(&hUsbDeviceFS,0);
+  
+  if(u8usbMode == DRV_USB_MSC)
+  USBD_MSC.Init(&hUsbDeviceFS,0);
 }
 
 void Drv_Usb_RxCpltCallback(uint8_t* buff, uint32_t len)

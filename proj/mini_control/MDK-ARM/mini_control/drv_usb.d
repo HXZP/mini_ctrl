@@ -63,4 +63,7 @@ mini_control/drv_usb.o: ..\..\..\user\Application\Drv\drv_usb.c \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc.h \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h \
   ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_core.h \
-  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Core\inc\usbd_ctlreq.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h \
+  ..\..\..\user\Unit\usb\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h

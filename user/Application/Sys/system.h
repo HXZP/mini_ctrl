@@ -17,7 +17,7 @@ void sys_usb_printf(const char *format, ...);
 #endif
 
 
-#if (SYSTEM_PRINTF_PORT == USING_PRINTF_UART)
+#if (SYSTEM_PRINTF_PORT == USING_PRINTF_UART || SYSTEM_PRINTF_PORT == USING_PRINTF_LCD)
 #define LOG(format, ...)               printf(format, ##__VA_ARGS__);
 
 #elif (SYSTEM_PRINTF_PORT == USING_PRINTF_USB)
@@ -36,4 +36,6 @@ void sys_delay_ms(uint16_t ms);
 uint32_t sys_getSys_us(void);
 uint32_t sys_getSys_ms(void);
 uint32_t sys_getSys_s(void);
+
+void sys_lcd_printf(uint8_t ch);
 #endif 
