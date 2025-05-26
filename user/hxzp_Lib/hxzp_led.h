@@ -30,7 +30,9 @@ typedef struct hxzp_Led_Config_s{
 
 }Led_Config;
 
-
+#define container_of(ptr, type, member) ({              \
+    const typeof(((type *)0)->member) *__mptr = (ptr);   \
+    (type *)((char *)__mptr - offsetof(type, member)); })
 typedef struct hxzp_Led_s{
 
   char *name;

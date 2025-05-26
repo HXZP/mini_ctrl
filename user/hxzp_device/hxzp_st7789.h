@@ -100,7 +100,7 @@ https://blog.csdn.net/weixin_51915497/article/details/136156233?spm=1001.2101.30
 #define LCD_HEIGHT     135
 #define LCD_AREA       LCD_Width*LCD_HEIGHT //32400
 
-#define LCD_DATA_TX_TIMES     10                            //传输次数
+#define LCD_DATA_TX_TIMES     4                            //传输次数
 #define LCD_DATA_LEN          LCD_AREA*2                     //数据长度 64800  0.0144  69.44hz
 #define LCD_DATA_BUFF_LEN     LCD_DATA_LEN/LCD_DATA_TX_TIMES //一次传输数量 648  
 
@@ -111,6 +111,11 @@ https://blog.csdn.net/weixin_51915497/article/details/136156233?spm=1001.2101.30
 #define LCD_ADRR_WEND   0x117
 #define LCD_ADRR_HSTART 0x35
 #define LCD_ADRR_HEND   0xBB
+//#define LCD_ADRR_WSTART 0
+//#define LCD_ADRR_WEND   0
+//#define LCD_ADRR_HSTART 0
+//#define LCD_ADRR_HEND   0
+
 
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000	  

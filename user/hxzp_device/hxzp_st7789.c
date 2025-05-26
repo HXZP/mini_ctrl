@@ -208,7 +208,7 @@ void hxzp_st7789_SetTran(uint16_t xstart, uint16_t ystart, uint16_t xend, uint16
 
 void hxzp_st7789_SetSpace(uint16_t xstart, uint16_t ystart, uint16_t xend, uint16_t yend)
 {
-    if(LCD.initFlag == 0)
+    if(LCD.initFlag != 2)
     {
         return;
     }
@@ -285,120 +285,40 @@ y = line
 
 逐行 高位在前 阴码
 */
-#if 1
-//uint8_t scanBuff[135][30] = {0};
 
-void hxzp_Lcd_PrintScan(uint16_t color, uint16_t colorb)
-{
-  uint16_t x;
-  uint16_t y;
-  uint16_t offset = 0;
-  uint16_t cnt = 0;
-  
-  hxzp_st7789_SetWindow(0,0,LCD_Width-1,LCD_HEIGHT-1);
-//  LCD.setCS(ST7798_GPIOL);
-//  LCD.setA0(ST7798_GPIOH);   
-#if 1  
-  for(uint8_t line = 0;line < 135; line++)
-  {
-    for(uint8_t column = 0;column < 30; column++)
-    {
-      for(uint8_t bit = 0;bit < 8; bit++)
-      {    
-         x = column * 8 + bit;
-         y = line;
-         if(scanBuff[line][column] & (0x80 >> bit))
-         {
-            hxzp_st7789_SetPoint(x,y,color); 
-//           LCD.buff[(line*30*8 + column*8 + bit - offset)*2] = (uint8_t)(color>>8);
-//           LCD.buff[(line*30*8 + column*8 + bit - offset)*2 + 1] = (uint8_t)(color&0xFF);
-         }
-         else
-         {
-            hxzp_st7789_SetPoint(x,y,colorb); 
-//           LCD.buff[(line*30*8 + column*8 + bit - offset)*2] = (uint8_t)(colorb>>8);
-//           LCD.buff[(line*30*8 + column*8 + bit - offset)*2 + 1] = (uint8_t)(colorb&0xFF);
-         }
-         
-//         cnt++;
-//         
-//         if(cnt == LCD_DATA_BUFF_LEN)
-//         {
-//            hxzp_st7789_Write(LCD.buff, LCD_DATA_BUFF_LEN);
-//            offset+=LCD_DATA_BUFF_LEN - 1;
-//            cnt = 0;
-//         }
-         
-//        if((!((line*30*8 + column*8 + 7)%(LCD_DATA_BUFF_LEN - 1))) && (line*30*8 + column*8 + 7))
-//        {
-//        //            offset = (LCD_DATA_BUFF_LEN - 1)*((line*30 + column)/(LCD_DATA_BUFF_LEN - 1));
-//         
-//          hxzp_st7789_Write(LCD.buff, LCD_DATA_BUFF_LEN);
-//          offset+=LCD_DATA_BUFF_LEN - 1;
-//        }            
-         
-      }
-      
-   
-    }
-  }
-#endif
- 
-//    for (uint16_t i = 0; i < LCD_DATA_BUFF_LEN/2; i++)
-//    {
-//        LCD.buff[i * 2]      = (uint8_t)(colorb>>8);
-//        LCD.buff[i * 2 + 1]  = (uint8_t)(colorb&0xFF); 
-//    }
-
-//    for (uint16_t i = 0; i < LCD_DATA_TX_TIMES; i++)
-//    {
-//        hxzp_st7789_Write(LCD.buff, LCD_DATA_BUFF_LEN);
-//    } 
-    
-//  LCD.setCS(ST7798_GPIOH);
-}
-#endif
-
-
-//static uint8_t cursorx = 0;
-//static uint8_t cursory = 0;
-//static uint8_t wide = 8;
-//static uint8_t high = 16;
-//static uint16_t color = 0xFFFF;
-//static uint16_t colorb = 0x0000;
-//归位
-uint8_t wordBuff[256];
-void hxzp_Lcd_PrintCR(void)
-{
-  LCD.string.cursorx = 0;
-  hxzp_st7789_SetTran(0,LCD.string.cursory,LCD_Width-1,LCD.string.cursory + 15, LCD.string.colorb);
-}
 //换行
 void hxzp_Lcd_PrintLF(void)
 {
   uint8_t y = LCD.string.cursory;  
-  uint16_t Temp;
+  uint8_t dataNum = LCD.string.wide * LCD.string.high;
 
+//  for(uint16_t i = 0; i < LCD_Width * LCD.string.high - LCD.string.buffIndex * dataNum;i++)
+//  {
+//    LCD.buff[LCD.string.buffIndex * dataNum*2 + i*2] = (uint8_t)(LCD.string.colorb>>8);
+//    LCD.buff[LCD.string.buffIndex * dataNum*2 + i*2 + 1] = (uint8_t)(LCD.string.colorb&0xFF);     
+//  }
+  LCD.string.buffIndex = 0;
+  
+//  hxzp_st7789_SetSpace(0,LCD.string.cursory,LCD_Width - 1,LCD.string.cursory+LCD.string.high-1);//15,360
+//  hxzp_st7789_SetTran(0,LCD.string.cursory,LCD_Width - 1,LCD.string.cursory+LCD.string.high-1, LCD.string.color);
+  
   if(y + 2*LCD.string.high - 1 > LCD_HEIGHT - 1)
   {
     y = 0;
-    
-#if 0    
-    //超范围，滚动屏幕,刷新
-    Temp = y + 2*high - 1 - LCD_HEIGHT; //(LCD_HEIGHT - 2*high + 1) - y;//后移的长度
-    memcpy(scanBuff,scanBuff[Temp],(135 - Temp)*30);
-    
-    y = LCD_HEIGHT - high;
-    memset(scanBuff[y],0,high*30);
-    
-    hxzp_Lcd_PrintScan(color,colorb); 
-#endif    
   }
   else   
   {
     y += LCD.string.high;
   }
+  
   LCD.string.cursory = y;
+}
+
+void hxzp_Lcd_PrintCR(void)
+{
+  hxzp_st7789_SetTran(LCD.string.cursorx,LCD.string.cursory,LCD_Width-1,LCD.string.cursory + LCD.string.high - 1, LCD.string.colorb);
+  
+  LCD.string.cursorx = 0;
 }
 
 void hxzp_Lcd_Print(const uint8_t *data)
@@ -409,36 +329,32 @@ void hxzp_Lcd_Print(const uint8_t *data)
   uint8_t xTemp;
   uint8_t yTemp;
   
-  uint16_t Temp;
-
+  uint8_t dataNum = LCD.string.wide * LCD.string.high/8;
+  
+  if(LCD.initFlag != 2)
+  {
+      return;
+  }  
+  
   if(x + LCD.string.wide > LCD_Width - 1)
   {
+//      hxzp_Lcd_PrintLF();
+//      hxzp_Lcd_PrintCR();
+    
+    
     x = 0;
  
     if(y + 2*LCD.string.high - 1 > LCD_HEIGHT - 1)
     {
       y = 0;
-      
-#if 0     
-      //超范围，滚动屏幕,刷新
-      Temp = y + 2*high - LCD_HEIGHT; //(LCD_HEIGHT - 2*high + 1) - y;//后移的长度
-      memcpy(scanBuff,scanBuff[Temp],(135 - Temp)*30);
-      
-      y = LCD_HEIGHT - high;
-      memset(scanBuff[y],0,high*30);
-      
-      hxzp_Lcd_PrintScan(color,colorb); 
-#endif    
     }
     else   
     {
       y += LCD.string.high;
     }
-    
-    hxzp_st7789_SetTran(0,y,LCD_Width-1,y + 15, LCD.string.colorb);
   }
 
-  uint8_t dataNum = LCD.string.wide * LCD.string.high/8;
+  
    
   for(uint16_t wordIdex = 0;wordIdex < dataNum;wordIdex++)
   {
@@ -449,23 +365,19 @@ void hxzp_Lcd_Print(const uint8_t *data)
       
        if(data[wordIdex] & (0x80 >> wordBit))
        {
-//          hxzp_st7789_SetPoint(xTemp,yTemp,color); 
-//          scanBuff[yTemp][xTemp/8] |= 0x80 >> wordBit;    
-         
-          LCD.buff[(wordIdex*8 + wordBit)*2] = (uint8_t)(LCD.string.color>>8);
-          LCD.buff[(wordIdex*8 + wordBit)*2 + 1] = (uint8_t)(LCD.string.color&0xFF);         
-
+          LCD.buff[LCD.string.buffIndex * LCD.string.wide * LCD.string.high*2 + (wordIdex*8 + wordBit)*2] = (uint8_t)(LCD.string.color>>8);
+          LCD.buff[LCD.string.buffIndex * LCD.string.wide * LCD.string.high*2 + (wordIdex*8 + wordBit)*2 + 1] = (uint8_t)(LCD.string.color&0xFF);         
        }
        else
        {
-          LCD.buff[(wordIdex*8 + wordBit)*2] = (uint8_t)(LCD.string.colorb>>8);
-          LCD.buff[(wordIdex*8 + wordBit)*2 + 1] = (uint8_t)(LCD.string.colorb&0xFF);            
-         
-//          hxzp_st7789_SetPoint(xTemp,yTemp,colorb); 
-//          scanBuff[yTemp][xTemp/8] &= ~(0x80 >> wordBit);
+          LCD.buff[LCD.string.buffIndex * LCD.string.wide * LCD.string.high*2 + (wordIdex*8 + wordBit)*2] = (uint8_t)(LCD.string.colorb>>8);
+          LCD.buff[LCD.string.buffIndex * LCD.string.wide * LCD.string.high*2 + (wordIdex*8 + wordBit)*2 + 1] = (uint8_t)(LCD.string.colorb&0xFF);            
        }
     }        
-  }     
+  }
+  
+//  LCD.string.buffIndex++;
+  
   hxzp_st7789_SetSpace(x,y,x+LCD.string.wide-1,y+LCD.string.high-1);
 
   x += LCD.string.wide;
@@ -522,12 +434,12 @@ static void hxzp_st7789_Init(void)
 
     LCD.setLED(ST7798_GPIOH);
 
+//    LCD.setRES(ST7798_GPIOH);
+//    hxzp_st7789_DelayMs(5);
+//    LCD.setRES(ST7798_GPIOL);
+//    hxzp_st7789_DelayMs(5);
     LCD.setRES(ST7798_GPIOH);
-    hxzp_st7789_DelayMs(5);
-    LCD.setRES(ST7798_GPIOL);
-    hxzp_st7789_DelayMs(5);
-    LCD.setRES(ST7798_GPIOH);
-    hxzp_st7789_DelayMs(5);
+//    hxzp_st7789_DelayMs(5);
 
     hxzp_st7789_Commad(0x01);//sleep in
     hxzp_st7789_DelayMs(10);
@@ -540,6 +452,7 @@ static void hxzp_st7789_Init(void)
 
     hxzp_st7789_Commad(0x3A);
     hxzp_st7789_Data(0x55);
+
 
     hxzp_st7789_Commad(0x20);//此命令用于从显示反转模式中恢复。
 
@@ -618,8 +531,11 @@ static void hxzp_st7789_Init(void)
     
     LCD.initFlag = 2;
     
+    LCD.string.wide = 8;
+    LCD.string.high = 16;
     LCD.string.color = 0xFFFF;
     LCD.string.colorb = 0x0000;
+    
 }
 
 hxzp_st7789_rgb colorbackground = {

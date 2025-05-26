@@ -37,8 +37,8 @@ void sys_lcd_printf(uint8_t ch)
 
   if(ch == 96)
   {
-    hxzp_Lcd_PrintLF();
     hxzp_Lcd_PrintCR();
+    hxzp_Lcd_PrintLF();
   }
   else
   {

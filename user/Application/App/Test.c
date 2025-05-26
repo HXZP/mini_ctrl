@@ -318,7 +318,7 @@ void StartDefaultTask(void *argument)
 
 //    sys_lcd_printf(77);
     
-//    printf("yes,you are right,please!what color:%d`",corlo);
+    printf("what color:%d`",corlo);
     
     
 //    HAL_UART_Transmit(&huart3,(uint8_t*)"abdasdk\r",strlen("abdasdk\r"),1000);
@@ -361,7 +361,7 @@ void StartDefaultTask(void *argument)
     
 //    if(HAL_SD_ReadBlocks_DMA(&hsd,dataR,1,1))while(1);
 //    osThreadExit();
-    osDelay(100);
+    osDelay(10);
   }
   /* USER CODE END StartDefaultTask */
 }

@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "STM32 Debugging",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stlink",
+            "device": "STM32F103VET6",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build" // 假设你有一个名为 build 的预启动任务
+        }
+    ]
+}

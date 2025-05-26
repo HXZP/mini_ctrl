@@ -1,8 +1,5 @@
 mini_control/list.o: ..\Middlewares\Third_Party\FreeRTOS\Source\list.c \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
   ..\Core\Inc\FreeRTOSConfig.h \
   ..\..\..\user\Application\Sys\board_config.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \

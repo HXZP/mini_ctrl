@@ -1,0 +1,672 @@
+{
+  "name": "mini_control",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Application",
+        "files": [],
+        "folders": [
+          {
+            "name": "MDK-ARM",
+            "files": [
+              {
+                "path": "../MDK-ARM/startup_stm32f103xe.s"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "User",
+            "files": [],
+            "folders": [
+              {
+                "name": "Core",
+                "files": [
+                  {
+                    "path": "../Core/Src/main.c"
+                  },
+                  {
+                    "path": "../Core/Src/gpio.c"
+                  },
+                  {
+                    "path": "../Core/Src/freertos.c"
+                  },
+                  {
+                    "path": "../Core/Src/dma.c"
+                  },
+                  {
+                    "path": "../Core/Src/sdio.c"
+                  },
+                  {
+                    "path": "../Core/Src/spi.c"
+                  },
+                  {
+                    "path": "../Core/Src/usart.c"
+                  },
+                  {
+                    "path": "../Core/Src/usb.c"
+                  },
+                  {
+                    "path": "../Core/Src/stm32f1xx_it.c"
+                  },
+                  {
+                    "path": "../Core/Src/stm32f1xx_hal_msp.c"
+                  },
+                  {
+                    "path": "../Core/Src/stm32f1xx_hal_timebase_tim.c"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "FATFS",
+                "files": [],
+                "folders": [
+                  {
+                    "name": "Target",
+                    "files": [
+                      {
+                        "path": "../FATFS/Target/bsp_driver_sd.c"
+                      }
+                    ],
+                    "folders": []
+                  },
+                  {
+                    "name": "App",
+                    "files": [
+                      {
+                        "path": "../FATFS/App/fatfs.c"
+                      }
+                    ],
+                    "folders": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Sys",
+            "files": [
+              {
+                "path": "../../../user/Application/Sys/board_config.h"
+              },
+              {
+                "path": "../../../user/Application/Sys/system.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "App",
+            "files": [
+              {
+                "path": "../../../user/Application/App/Test.c"
+              },
+              {
+                "path": "../../../user/Application/App/user_init.c"
+              },
+              {
+                "path": "../../../user/Application/App/user_key.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "Drv",
+            "files": [
+              {
+                "path": "../../../user/Application/Drv/drv_init.c"
+              },
+              {
+                "path": "../../../user/Application/Drv/drv_key.c"
+              },
+              {
+                "path": "../../../user/Application/Drv/drv_lcd.c"
+              },
+              {
+                "path": "../../../user/Application/Drv/drv_led.c"
+              },
+              {
+                "path": "../../../user/Application/Drv/drv_usart.c"
+              },
+              {
+                "path": "../../../user/Application/Drv/drv_usb.c"
+              },
+              {
+                "path": "../../../user/Application/Drv/drv_bmi270.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "USB",
+            "files": [
+              {
+                "path": "../../../user/Application/App_USB/App/usbd_cdc_if.c"
+              },
+              {
+                "path": "../../../user/Application/App_USB/App/usbd_storage_if.c"
+              },
+              {
+                "path": "../../../user/Application/App_USB/App/usb_device.c"
+              },
+              {
+                "path": "../../../user/Application/App_USB/App/usbd_desc.c"
+              },
+              {
+                "path": "../../../user/Application/App_USB/Target/usbd_conf.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Drivers",
+        "files": [],
+        "folders": [
+          {
+            "name": "STM32F1xx_HAL_Driver",
+            "files": [
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_sdmmc.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c"
+              },
+              {
+                "path": "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "CMSIS",
+            "files": [
+              {
+                "path": "../Core/Src/system_stm32f1xx.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Middlewares",
+        "files": [],
+        "folders": [
+          {
+            "name": "FreeRTOS",
+            "files": [
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/croutine.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/list.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/queue.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/tasks.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/timers.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/port.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "FatFs",
+            "files": [
+              {
+                "path": "../Middlewares/Third_Party/FatFs/src/diskio.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FatFs/src/ff.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FatFs/src/option/syscall.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FatFs/src/option/cc936.c"
+              },
+              {
+                "path": "../Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Lib",
+        "files": [
+          {
+            "path": "../../../user/hxzp_Lib/hxzp_key.c"
+          },
+          {
+            "path": "../../../user/hxzp_Lib/hxzp_led.c"
+          },
+          {
+            "path": "../../../user/hxzp_Lib/hxzp_list.c"
+          },
+          {
+            "path": "../../../user/hxzp_Lib/hxzp_ringbuff.c"
+          },
+          {
+            "path": "../../../user/hxzp_Lib/hxzp_template.c"
+          },
+          {
+            "path": "../../../user/hxzp_Lib/hxzp_lib.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Device",
+        "files": [
+          {
+            "path": "../../../user/hxzp_device/hxzp_st7789.c"
+          }
+        ],
+        "folders": [
+          {
+            "name": "bmi270",
+            "files": [
+              {
+                "path": "../../../user/hxzp_device/bmi270/bmi2.c"
+              },
+              {
+                "path": "../../../user/hxzp_device/bmi270/bmi270.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Unit",
+        "files": [],
+        "folders": [
+          {
+            "name": "cmbacktrace",
+            "files": [
+              {
+                "path": "../../../user/Unit/cm_backtrace/cm_backtrace.c"
+              },
+              {
+                "path": "../../../user/Unit/cm_backtrace/cmb_cfg.h"
+              },
+              {
+                "path": "../../../user/Unit/cm_backtrace/fault_handler/keil/cmb_fault.S"
+              },
+              {
+                "path": "../../../user/Unit/cm_backtrace/cmb_def.h"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "USB",
+            "files": [],
+            "folders": [
+              {
+                "name": "CORE",
+                "files": [
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Core/Src/usbd_core.c"
+                  },
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c"
+                  },
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "CDC",
+                "files": [
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "MSC",
+                "files": [
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c"
+                  },
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_bot.c"
+                  },
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_data.c"
+                  },
+                  {
+                    "path": "../../../user/Unit/usb/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c"
+                  }
+                ],
+                "folders": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "::CMSIS",
+        "files": [],
+        "folders": []
+      },
+      {
+        "name": "::Compiler",
+        "files": [
+          {
+            "path": "../MDK-ARM/RTE/Compiler/EventRecorderConf.h"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "98c754bead4a336772869e06e19bbabb"
+  },
+  "targets": {
+    "mini_control": {
+      "excludeList": [
+        "<virtual_root>/Application/Drv/drv_bmi270.c",
+        "<virtual_root>/Device/bmi270"
+      ],
+      "toolchain": "AC6",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x10000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x8000000",
+                "size": "0x80000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "STLink",
+      "uploadConfig": {
+        "bin": "",
+        "proType": "SWD",
+        "resetMode": "default",
+        "runAfterProgram": true,
+        "speed": 4000,
+        "address": "0x8000000",
+        "elFile": "None",
+        "optionBytes": ".eide/mini_control.st.option.bytes.ini",
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "null",
+            "cpuName": "null"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "../Core/Inc",
+          "../Drivers/STM32F1xx_HAL_Driver/Inc",
+          "../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy",
+          "../Drivers/CMSIS/Device/ST/STM32F1xx/Include",
+          "../Drivers/CMSIS/Include",
+          "../Middlewares/Third_Party/FreeRTOS/Source/include",
+          "../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+          "../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3",
+          "../FATFS/Target",
+          "../FATFS/App",
+          "../Middlewares/Third_Party/FatFs/src",
+          "../Middlewares/Third_Party/FatFs/src/drivers",
+          "../../../user/Application/Sys",
+          "../../../user/Application/App",
+          "../../../user/Application/Drv",
+          "../../../user/hxzp_device",
+          "../../../user/hxzp_Lib",
+          "../../../user/Unit",
+          "../../../user/Unit/cm_backtrace",
+          "../../../user/Unit/usb/STM32_USB_Device_Library/Core/inc",
+          "../../../user/Unit/usb/STM32_USB_Device_Library/Class/cdc/inc",
+          "../../../user/Unit/usb/STM32_USB_Device_Library/Class/msc/inc",
+          "../../../user/Application/App_USB/App",
+          "../../../user/Application/App_USB/Target",
+          "../../../user/hxzp_device/bmi270",
+          ".cmsis/include",
+          "../MDK-ARM/RTE/Compiler",
+          "../MDK-ARM/RTE/_mini_control"
+        ],
+        "libList": [],
+        "defineList": [
+          "USE_HAL_DRIVER",
+          "STM32F103xE"
+        ]
+      },
+      "builderOptions": {
+        "AC6": {
+          "version": 3,
+          "beforeBuildTasks": [],
+          "afterBuildTasks": [],
+          "global": {
+            "use-microLIB": true,
+            "output-debug-info": "enable"
+          },
+          "c/cpp-compiler": {
+            "optimization": "level-1",
+            "language-c": "c99",
+            "language-cpp": "gnu++11",
+            "link-time-optimization": false,
+            "one-elf-section-per-function": true,
+            "short-enums#wchar": true,
+            "warnings": "ac5-like-warnings"
+          },
+          "asm-compiler": {
+            "$use": "asm-auto"
+          },
+          "linker": {
+            "output-format": "elf",
+            "misc-controls": "--diag_suppress=L6329",
+            "xo-base": "",
+            "ro-base": "",
+            "rw-base": ""
+          }
+        }
+      }
+    }
+  },
+  "version": "3.5"
+}

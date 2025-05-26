@@ -1,6 +1,36 @@
 #include "hxzp_ringbuff.h"
 
+void ringbuff_init_dynamic(uint32_t esize, uint32_t len)
+{
+		ringbuff *buff;
+	
+		buff = malloc(sizeof(ringbuff)+esize*len);
+	
+    buff->data = (char *)buff + sizeof(ringbuff);
+    buff->esize = esize;
+    buff->mask = len - 1;
 
+    buff->in = 0;
+    buff->out = 0;
+
+    memset(buff->data, 0, len * esize);
+}
+
+void ringbuff_free_dynamic(uint32_t esize, uint32_t len)
+{
+		ringbuff *buff;
+	
+		buff = malloc(sizeof(ringbuff)+esize*len);
+	
+    buff->data = (char *)buff + sizeof(ringbuff);
+    buff->esize = esize;
+    buff->mask = len - 1;
+
+    buff->in = 0;
+    buff->out = 0;
+
+    memset(buff->data, 0, len * esize);
+}
 
 void ringbuff_init(ringbuff *buff, void *data, uint32_t esize, uint32_t len)
 {
