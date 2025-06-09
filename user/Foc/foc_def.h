@@ -14,12 +14,13 @@
 
 */
 #define FOC_PI 3.14159265f
-#define SQRT_3 0.86602540f
+#define SQRT_3 1.73214285f
 
 typedef enum{
     
     Foc_Zero_Angle_Init,
     Foc_Working,
+    Foc_Shutdown,
 }foc_state_e;
 
 typedef struct{
@@ -106,7 +107,10 @@ typedef struct{
     float zero_angle;
     float elec_angle;
     float mech_angle;
-}foc_angle_sensor_t;
+	
+    float elec_angle360;
+    float mech_angle360;	
+}foc_angle_t;
 
 typedef struct{
 
@@ -130,7 +134,7 @@ typedef struct{
     foc_vector_percent_t vector_percent;
     foc_pwm_duty_t      pwm_duty;
 
-    foc_angle_sensor_t  angle;
+    foc_angle_t  angle;
 
     foc_park_t         target_park;
 
@@ -139,11 +143,13 @@ typedef struct{
 typedef struct{
     
     foc_state_e state;
+	
     uint8_t pole_pairs;//极对数
     float master_voltage;//母线电压
+	
     float zero_angle;
+	
     uint16_t pwm_period;
-    uint16_t pwm_ccr;
 }foc_cfg_t;
 
 
