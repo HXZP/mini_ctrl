@@ -103,7 +103,7 @@
         <bEvRecOn>1</bEvRecOn>
         <bSchkAxf>0</bSchkAxf>
         <bTchkAxf>0</bTchkAxf>
-        <nTsel>6</nTsel>
+        <nTsel>4</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -114,7 +114,7 @@
         <tDlgDll></tDlgDll>
         <tDlgPa></tDlgPa>
         <tIfile>..\..\..\user\Unit\stm.ini</tIfile>
-        <pMon>STLink\ST-LINKIII-KEIL_SWO.dll</pMon>
+        <pMon>Segger\JL2CM3.dll</pMon>
       </DebugOpt>
       <TargetDriverDllRegistry>
         <SetRegEntry>
@@ -335,8 +335,8 @@
         </Mm>
       </MemoryWindow2>
       <ScvdPack>
-        <Filename>D:\keil\Pack\Keil\ARM_Compiler\1.7.2\EventRecorder.scvd</Filename>
-        <Type>Keil::ARM_Compiler@1.7.2</Type>
+        <Filename>C:\Users\HXZP\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.2\EventRecorder.scvd</Filename>
+        <Type>Keil.ARM_Compiler.1.7.2</Type>
         <SubType>1</SubType>
       </ScvdPack>
       <Tracepoint>

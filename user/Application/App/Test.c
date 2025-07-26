@@ -223,7 +223,7 @@ void StartDefaultTask(void *argument)
 //  if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) {}
 
 
-  res = f_mount(&SDFatFS, SDPath, 1);
+//  res = f_mount(&SDFatFS, SDPath, 1);
   
 //  if(res)
 //  {
@@ -286,9 +286,9 @@ void StartDefaultTask(void *argument)
     
     
     
-    corlo++;
-    
-    if(corlo > 100)corlo = 0;
+//    corlo++;
+//    
+//    if(corlo > 100)corlo = 0;
     
     
     
@@ -318,7 +318,7 @@ void StartDefaultTask(void *argument)
 
 //    sys_lcd_printf(77);
     
-    printf("what color:%d`",corlo);
+//    printf("what color:%d`",corlo);
     
     
 //    HAL_UART_Transmit(&huart3,(uint8_t*)"abdasdk\r",strlen("abdasdk\r"),1000);
