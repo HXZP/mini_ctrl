@@ -42,12 +42,12 @@ void MX_SDIO_SD_Init(void)
   hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
   hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
   hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
-  hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
+  hsd.Init.BusWide = SDIO_BUS_WIDE_4B;
   hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_ENABLE;
   hsd.Init.ClockDiv = 6;
   /* USER CODE BEGIN SDIO_Init 2 */
   
-  //clock = 36/(div+2) 最小是6
+  //clock = 36/(div+2) 锟斤拷小锟斤拷6
   /* HAL SD initialization */
 
   /* USER CODE END SDIO_Init 2 */

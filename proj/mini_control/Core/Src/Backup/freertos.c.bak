@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "system.h"
 
 /* USER CODE END Includes */
 
@@ -62,8 +63,36 @@ const osThreadAttr_t defaultTask_attributes = {
 
 void StartDefaultTask(void *argument);
 
-extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+
+/* Hook prototypes */
+void vApplicationIdleHook(void);
+
+/* USER CODE BEGIN 2 */
+#if (USING_PRINTF_TASK_INFO == 1)
+
+#define IDLEHOOK_TIME_MS 100
+void vApplicationIdleHook(void)
+{
+  static uint32_t getMs = 0;
+  
+  if(sys_getSys_ms() - getMs > IDLEHOOK_TIME_MS)
+  {
+  
+    char *buffer = (char*)malloc(256);
+    vTaskList(buffer);
+    
+    printf("///////////////////////\r\n");
+    printf("%s",buffer);
+    
+    
+    free(buffer);
+    
+    getMs = sys_getSys_ms();
+  }
+}
+#endif
+/* USER CODE END 2 */
 
 /**
   * @brief  FreeRTOS initialization
@@ -114,8 +143,6 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 __weak void StartDefaultTask(void *argument)
 {
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)

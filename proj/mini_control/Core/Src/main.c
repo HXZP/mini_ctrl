@@ -24,7 +24,7 @@
 #include "sdio.h"
 #include "spi.h"
 #include "usart.h"
-#include "usb.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -73,7 +73,8 @@ void MX_FREERTOS_Init(void);
   * @retval int
   */
 int main(void)
-    {
+{
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -102,7 +103,6 @@ int main(void)
   MX_FATFS_Init();
   MX_USART3_UART_Init();
   MX_USART2_UART_Init();
-  MX_USB_PCD_Init();
   /* USER CODE BEGIN 2 */
   Drv_Init();
   User_Init();
@@ -110,13 +110,16 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Init scheduler */
-  osKernelInitialize();  /* Call init function for freertos objects (in freertos.c) */
+  osKernelInitialize();
+
+  /* Call init function for freertos objects (in cmsis_os2.c) */
   MX_FREERTOS_Init();
 
   /* Start scheduler */
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   
@@ -193,7 +196,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM8) {
+  if (htim->Instance == TIM8)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */

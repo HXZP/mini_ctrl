@@ -2,9 +2,7 @@
 #define DRV_USB_H
 
 #include "hxzp_lib.h"
-#include "usb_device.h"
-#include "usbd_cdc_if.h"
-#include "usbd_msc.h"
+
 
 #define DRV_USB_PACKET_LEN 64
 

@@ -27,7 +27,7 @@
 #include "usbd_msc.h"
 
 /* USER CODE BEGIN Includes */
-#include "usb.h"
+//#include "usb.h"
 #include "drv_usb.h"
 /* USER CODE END Includes */
 
