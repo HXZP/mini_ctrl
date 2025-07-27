@@ -36,6 +36,23 @@ led设计 通过外部传入亮度表以及读表速度 加入优先级 加入在忙状态
 
 */
 extern USBD_HandleTypeDef hUsbDeviceFS;
+
+//typedef struct {
+//  
+//  struct 
+//  {
+//    uint8_t left:1;
+//    uint8_t right:1;
+//    uint8_t middle:1;
+//    uint8_t reserve:5;
+//  }buttons;// ????? (bit0:???, bit1:???, bit2:?м?)
+//  
+//  int8_t x;          // X????? (-127??127)
+//  int8_t y;          // Y????? (-127??127)
+//  int8_t wheel;      // ??????? (-127??127)
+//} HID_MOUSE_Report_t;
+//HID_MOUSE_Report_t report;
+
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */    
@@ -54,9 +71,26 @@ void StartDefaultTask(void *argument)
 //    memset(key_report, 0, sizeof(key_report));
 //    USBD_HID_SendReport(&hUsbDeviceFS, key_report, 8, 0);
     
-    uint8_t mouse_report[4] = {0x00, 20, 15, 0};
-    USBD_HID_SendReport(&hUsbDeviceFS, mouse_report, 4, 1);    
+//	report.x = 50;  
+	  
+//    uint8_t mouse_report[4] = {0x00, 20, 15, 0};
+//    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&report, 4, 1);    
     
+//  uint8_t mouse_report[4] = {0}; // 初始化所有字段为0
+//  
+//  // 按下左键 (设置bit0)
+//  mouse_report[0] = 0x01; // buttons: 左键按下
+//  USBD_HID_SendReport(&hUsbDeviceFS, mouse_report, 4, 1);
+//  
+//  // 短暂延时 (模拟按下时间)
+//  HAL_Delay(20); // 20ms是理想的点击延时
+//  
+//  // 释放所有按键
+//  mouse_report[0] = 0x00;
+//  USBD_HID_SendReport(&hUsbDeviceFS, mouse_report, 4, 1);	  
+	  
+	  
+	  
   }
   /* USER CODE END StartDefaultTask */
 }
