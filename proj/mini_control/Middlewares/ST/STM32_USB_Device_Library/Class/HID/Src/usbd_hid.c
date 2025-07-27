@@ -372,21 +372,28 @@ __ALIGN_BEGIN static uint8_t USBD_HID_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_
   * @param  cfgidx: Configuration index
   * @retval status
   */
-static uint8_t  USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
+static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 {
-  /* Open EP IN */
-  USBD_LL_OpenEP(pdev, HID_EPIN_ADDR, USBD_EP_TYPE_INTR, HID_EPIN_SIZE);
-  pdev->ep_in[HID_EPIN_ADDR & 0xFU].is_used = 1U;
+  // 初始化键盘端点 (EP1)
+  USBD_LL_OpenEP(pdev, 0x81, USBD_EP_TYPE_INTR, 8);
+  pdev->ep_in[0x81 & 0xFU].is_used = 1U;
+  
+  // 初始化鼠标端点 (EP2) - 添加这部分
+  USBD_LL_OpenEP(pdev, 0x82, USBD_EP_TYPE_INTR, 4);
+  pdev->ep_in[0x82 & 0xFU].is_used = 1U;
 
   pdev->pClassData = USBD_malloc(sizeof(USBD_HID_HandleTypeDef));
-
+  
   if (pdev->pClassData == NULL)
   {
     return USBD_FAIL;
   }
-
+  
   ((USBD_HID_HandleTypeDef *)pdev->pClassData)->state = HID_IDLE;
-
+  
+  // 添加接口状态初始化
+  ((USBD_HID_HandleTypeDef *)pdev->pClassData)->AltSetting = 0;
+  
   return USBD_OK;
 }
 
@@ -397,20 +404,22 @@ static uint8_t  USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
   * @param  cfgidx: Configuration index
   * @retval status
   */
-static uint8_t  USBD_HID_DeInit(USBD_HandleTypeDef *pdev,
-                                uint8_t cfgidx)
+static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 {
-  /* Close HID EPs */
-  USBD_LL_CloseEP(pdev, HID_EPIN_ADDR);
-  pdev->ep_in[HID_EPIN_ADDR & 0xFU].is_used = 0U;
-
-  /* FRee allocated memory */
+  // 关闭键盘端点
+  USBD_LL_CloseEP(pdev, 0x81);
+  pdev->ep_in[0x81 & 0xFU].is_used = 0U;
+  
+  // 关闭鼠标端点 - 添加这部分
+  USBD_LL_CloseEP(pdev, 0x82);
+  pdev->ep_in[0x82 & 0xFU].is_used = 0U;
+  
   if (pdev->pClassData != NULL)
   {
     USBD_free(pdev->pClassData);
     pdev->pClassData = NULL;
   }
-
+  
   return USBD_OK;
 }
 
@@ -475,40 +484,31 @@ static uint8_t  USBD_HID_Setup(USBD_HandleTypeDef *pdev,
         case USB_REQ_GET_DESCRIPTOR:
           if (req->wValue >> 8 == HID_REPORT_DESC)
           {
-            if(hhid->AltSetting == 0)//if((uint8_t)req->wIndex == 0)
+            // 修改为根据接口号选择描述符
+            uint8_t interface_num = LOBYTE(req->wIndex);
+            
+            if(interface_num == 0)  // 键盘接口
             {
               len = sizeof(HID_KEYBOARD_ReportDesc);
               pbuf = HID_KEYBOARD_ReportDesc;
             }
-            else if(hhid->AltSetting == 1)//else if((uint8_t)req->wIndex == 1)
+            else if(interface_num == 1)  // 鼠标接口
             {
               len = sizeof(HID_MOUSE_ReportDesc);
               pbuf = HID_MOUSE_ReportDesc;
             }
             else
             {
-              // 无效接口，返回错误
               USBD_CtlError(pdev, req);
               ret = USBD_FAIL;
               break;
             }
-            // 确保不超过请求的长度
+            
             len = MIN(len, req->wLength);
+            USBD_CtlSendData(pdev, pbuf, len);
           }
-          else if (req->wValue >> 8 == HID_DESCRIPTOR_TYPE)
-          {
-            pbuf = USBD_HID_Desc;
-            len = MIN(USB_HID_DESC_SIZ, req->wLength);
-          }
-          else
-          {
-            USBD_CtlError(pdev, req);
-            ret = USBD_FAIL;
-            break;
-          }
-          USBD_CtlSendData(pdev, pbuf, len);
           break;
-
+          
         case USB_REQ_GET_INTERFACE :
           if (pdev->dev_state == USBD_STATE_CONFIGURED)
           {

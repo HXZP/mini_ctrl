@@ -36,8 +36,9 @@
 //  return u8usbMode;
 //}
 
+#include "usb_device.h"
 
 void Drv_Usb_Init(void)
 {
-
+  MX_USB_DEVICE_Init();
 }
