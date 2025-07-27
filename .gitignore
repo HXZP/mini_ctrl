@@ -2,3 +2,6 @@
 *.d
 *.HXZP
 proj/mini_control/MDK-ARM/mini_control
+proj/mini_control/MDK-ARM/mini_control.uvguix.13241
+proj/control.uvmpw.uvgui.13241
+*.13241
