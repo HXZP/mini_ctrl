@@ -32,7 +32,7 @@
 
 // <q> ´òÓ¡´íÎó×·×Ù
 // <i> configUSE_IDLE_HOOKÒªÖÃ1
-#define USING_PRINTF_CMBACKTRACE 1
+#define USING_PRINTF_CMBACKTRACE 0
 
 //</h>
 
