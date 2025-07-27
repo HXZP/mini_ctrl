@@ -134,6 +134,47 @@ USBD_ClassTypeDef  USBD_HID =
   USBD_HID_GetDeviceQualifierDesc,
 };
 
+
+/*hxzp*/
+// 键盘报告描述符 (8字节)
+__ALIGN_BEGIN static uint8_t HID_KEYBOARD_ReportDesc[] __ALIGN_END = {
+  0x05, 0x01, 0x09, 0x06, 0xA1, 0x01, 0x05, 0x07, 0x19, 0xE0, 0x29, 0xE7,
+  0x15, 0x00, 0x25, 0x01, 0x75, 0x01, 0x95, 0x08, 0x81, 0x02, 0x95, 0x01,
+  0x75, 0x08, 0x81, 0x01, 0x95, 0x05, 0x75, 0x01, 0x05, 0x08, 0x19, 0x01,
+  0x29, 0x05, 0x91, 0x02, 0x95, 0x01, 0x75, 0x03, 0x91, 0x01, 0x95, 0x06,
+  0x75, 0x08, 0x15, 0x00, 0x25, 0x65, 0x05, 0x07, 0x19, 0x00, 0x29, 0x65,
+  0x81, 0x00, 0xC0
+};
+
+// 鼠标报告描述符 (4字节)
+__ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[] __ALIGN_END = {
+  0x05, 0x01, 0x09, 0x02, 0xA1, 0x01, 0x09, 0x01, 0xA1, 0x00, 0x05, 0x09,
+  0x19, 0x01, 0x29, 0x03, 0x15, 0x00, 0x25, 0x01, 0x95, 0x03, 0x75, 0x01,
+  0x81, 0x02, 0x95, 0x01, 0x75, 0x05, 0x81, 0x01, 0x05, 0x01, 0x09, 0x30,
+  0x09, 0x31, 0x15, 0x81, 0x25, 0x7F, 0x75, 0x08, 0x95, 0x02, 0x81, 0x06,
+  0xC0, 0xC0
+};
+
+__ALIGN_BEGIN static uint8_t USBD_HID_CfgFSDesc[USB_HID_CONFIG_DESC_SIZ] __ALIGN_END = {
+  // 配置描述符头 (9字节)
+  0x09, USB_DESC_TYPE_CONFIGURATION, 0x3B, 0x00, 0x02, 0x01, 0x00, 0xE0, 0x32,
+
+  // 键盘接口描述符 (9字节)
+  0x09, USB_DESC_TYPE_INTERFACE, 0x00, 0x00, 0x01, 0x03, 0x01, 0x01, 0x00,
+  // HID描述符 (9字节)
+  0x09, HID_DESCRIPTOR_TYPE, 0x11, 0x01, 0x00, 0x01, 0x22, sizeof(HID_KEYBOARD_ReportDesc), 0x00,
+  // 端点描述符 (7字节)
+  0x07, USB_DESC_TYPE_ENDPOINT, 0x81, 0x03, 0x08, 0x00, 0x0A,
+
+  // 鼠标接口描述符 (9字节)
+  0x09, USB_DESC_TYPE_INTERFACE, 0x01, 0x00, 0x01, 0x03, 0x01, 0x02, 0x00,
+  // HID描述符 (9字节)
+  0x09, HID_DESCRIPTOR_TYPE, 0x11, 0x01, 0x00, 0x01, 0x22, sizeof(HID_MOUSE_ReportDesc), 0x00,
+  // 端点描述符 (7字节)
+  0x07, USB_DESC_TYPE_ENDPOINT, 0x82, 0x03, 0x04, 0x00, 0x0A
+};
+
+#if 0
 /* USB HID device FS Configuration Descriptor */
 __ALIGN_BEGIN static uint8_t USBD_HID_CfgFSDesc[USB_HID_CONFIG_DESC_SIZ]  __ALIGN_END =
 {
@@ -183,6 +224,7 @@ __ALIGN_BEGIN static uint8_t USBD_HID_CfgFSDesc[USB_HID_CONFIG_DESC_SIZ]  __ALIG
   HID_FS_BINTERVAL,          /*bInterval: Polling Interval */
   /* 34 */
 };
+#endif
 
 /* USB HID device HS Configuration Descriptor */
 __ALIGN_BEGIN static uint8_t USBD_HID_CfgHSDesc[USB_HID_CONFIG_DESC_SIZ]  __ALIGN_END =
@@ -315,56 +357,6 @@ __ALIGN_BEGIN static uint8_t USBD_HID_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_
   0x00,
 };
 
-__ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  __ALIGN_END =
-{
-  0x05,   0x01,
-  0x09,   0x02,
-  0xA1,   0x01,
-  0x09,   0x01,
-
-  0xA1,   0x00,
-  0x05,   0x09,
-  0x19,   0x01,
-  0x29,   0x03,
-
-  0x15,   0x00,
-  0x25,   0x01,
-  0x95,   0x03,
-  0x75,   0x01,
-
-  0x81,   0x02,
-  0x95,   0x01,
-  0x75,   0x05,
-  0x81,   0x01,
-
-  0x05,   0x01,
-  0x09,   0x30,
-  0x09,   0x31,
-  0x09,   0x38,
-
-  0x15,   0x81,
-  0x25,   0x7F,
-  0x75,   0x08,
-  0x95,   0x03,
-
-  0x81,   0x06,
-  0xC0,   0x09,
-  0x3c,   0x05,
-  0xff,   0x09,
-
-  0x01,   0x15,
-  0x00,   0x25,
-  0x01,   0x75,
-  0x01,   0x95,
-
-  0x02,   0xb1,
-  0x22,   0x75,
-  0x06,   0x95,
-  0x01,   0xb1,
-
-  0x01,   0xc0
-};
-
 /**
   * @}
   */
@@ -483,8 +475,25 @@ static uint8_t  USBD_HID_Setup(USBD_HandleTypeDef *pdev,
         case USB_REQ_GET_DESCRIPTOR:
           if (req->wValue >> 8 == HID_REPORT_DESC)
           {
-            len = MIN(HID_MOUSE_REPORT_DESC_SIZE, req->wLength);
-            pbuf = HID_MOUSE_ReportDesc;
+            if(hhid->AltSetting == 0)//if((uint8_t)req->wIndex == 0)
+            {
+              len = sizeof(HID_KEYBOARD_ReportDesc);
+              pbuf = HID_KEYBOARD_ReportDesc;
+            }
+            else if(hhid->AltSetting == 1)//else if((uint8_t)req->wIndex == 1)
+            {
+              len = sizeof(HID_MOUSE_ReportDesc);
+              pbuf = HID_MOUSE_ReportDesc;
+            }
+            else
+            {
+              // 无效接口，返回错误
+              USBD_CtlError(pdev, req);
+              ret = USBD_FAIL;
+              break;
+            }
+            // 确保不超过请求的长度
+            len = MIN(len, req->wLength);
           }
           else if (req->wValue >> 8 == HID_DESCRIPTOR_TYPE)
           {
@@ -547,24 +556,22 @@ static uint8_t  USBD_HID_Setup(USBD_HandleTypeDef *pdev,
   * @param  buff: pointer to report
   * @retval status
   */
-uint8_t USBD_HID_SendReport(USBD_HandleTypeDef  *pdev,
-                            uint8_t *report,
-                            uint16_t len)
+uint8_t USBD_HID_SendReport(USBD_HandleTypeDef *pdev, 
+                           uint8_t *report, 
+                           uint16_t len,
+                           uint8_t interface_idx) 
 {
-  USBD_HID_HandleTypeDef     *hhid = (USBD_HID_HandleTypeDef *)pdev->pClassData;
+  USBD_HID_HandleTypeDef *hhid = (USBD_HID_HandleTypeDef*)pdev->pClassData;
+  uint8_t ep_addr = (interface_idx == 0) ? HID_EPIN_ADDR : (HID_EPIN_ADDR + 1);
 
-  if (pdev->dev_state == USBD_STATE_CONFIGURED)
-  {
-    if (hhid->state == HID_IDLE)
-    {
+  if(pdev->dev_state == USBD_STATE_CONFIGURED) {
+    if(hhid->state == HID_IDLE) {
       hhid->state = HID_BUSY;
-      USBD_LL_Transmit(pdev,
-                       HID_EPIN_ADDR,
-                       report,
-                       len);
+      USBD_LL_Transmit(pdev, ep_addr, report, len);
     }
+    return USBD_OK;
   }
-  return USBD_OK;
+  return USBD_FAIL;
 }
 
 /**
